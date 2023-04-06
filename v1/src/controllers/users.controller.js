@@ -16,9 +16,8 @@ const create = async (req, res) => {
   req.body.password = passwordToHash(req.body.password);
 
   try {
-    const user = await insert(req.body);
+    await insert(req.body);
     res.send({
-      user,
       success: true,
       message: "User created successfully",
     })
