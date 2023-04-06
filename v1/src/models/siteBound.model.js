@@ -14,8 +14,19 @@ const SiteBoundSchema = Mongoose.Schema(
     },
     vertexes: [
       {
-        type: Mongoose.Schema.Types.ObjectId,
-        ref: "vertexes",
+        vertexNumber: Number,
+        coordX: {
+          type: Mongoose.Types.Decimal128,
+          required: true,
+        },
+        coordY: {
+          type: Mongoose.Types.Decimal128,
+          required: true,
+        },
+        coordZ: {
+          type: Mongoose.Types.Decimal128,
+          required: true,
+        },
       },
     ],
   },

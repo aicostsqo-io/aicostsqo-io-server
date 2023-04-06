@@ -1,8 +1,12 @@
 const Joi = require("joi");
 
 const createValidation = Joi.object({
+<<<<<<< HEAD
   full_name: Joi.string().required().min(2),
   password: Joi.string().required().min(5),
+=======
+  password: Joi.string().required().min(8),
+>>>>>>> refs/remotes/origin/main
   email: Joi.string().email().required().min(8),
 });
 
@@ -12,7 +16,6 @@ const loginValidation = Joi.object({
 });
 
 const updateValidation = Joi.object({
-  full_name: Joi.string().min(2),
   email: Joi.string().email().min(8),
 });
 

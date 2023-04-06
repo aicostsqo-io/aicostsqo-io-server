@@ -1,22 +1,23 @@
 const Mongoose = require("mongoose");
 
-const VertexSchema = Mongoose.Schema(
+const LidarPointCloudSchema = Mongoose.Schema(
   {
-    siteBoundId: {
+    siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "siteBounds",
-      required: true,
+      ref: "sites",
     },
-    vertexNumber: Number,
-    coordX: {
+    vertexId: Number,
+    jointSetNumber: Number,
+    discontiunityPlaneNumber: Number,
+    positionX: {
       type: Mongoose.Types.Decimal128,
       required: true,
     },
-    coordY: {
+    positionY: {
       type: Mongoose.Types.Decimal128,
       required: true,
     },
-    coordZ: {
+    positionZ: {
       type: Mongoose.Types.Decimal128,
       required: true,
     },
@@ -24,4 +25,4 @@ const VertexSchema = Mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("vertexes", VertexSchema);
+module.exports = Mongoose.model("lidarPointClouds", LidarPointCloudSchema);
