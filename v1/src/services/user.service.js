@@ -1,8 +1,15 @@
 const User = require("../models/user.model");
 
-const insert = (data) => {
-  const user = User(data);
-  return user.save();
+
+const insert = async (data) => {
+  const { email } = data;
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    throw new Error("User Already Exists");
+  }
+
+  const user = await User.create(data);
+  return user;
 };
 
 const list = () => {

@@ -12,15 +12,22 @@ const {
 } = require("../services/user.service");
 const httpStatus = require("http-status");
 
-const create = (req, res) => {
+const create = async (req, res) => {
   req.body.password = passwordToHash(req.body.password);
-  insert(req.body)
-    .then((response) => {
-      res.status(httpStatus.CREATED).send(response);
+
+  try {
+    const user = await insert(req.body);
+    res.send({
+      user,
+      success: true,
+      message: "User created successfully",
     })
-    .catch((e) => {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e);
-    });
+  } catch (e) {
+    res.send({
+      success: false,
+      message: e.message
+    })
+  }
 };
 
 const login = (req, res) => {

@@ -11,7 +11,7 @@ const {
 const authenticateToken = require("../middlewares/authenticate");
 const router = express.Router();
 
-router.get("/", index);
+router.route("/").get(index);
 router.route("/").post(validate(schemas.createValidation), create);
 router
   .route("/")
