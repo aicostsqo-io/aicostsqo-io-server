@@ -16,9 +16,13 @@ const list = () => {
   return User.find({});
 };
 
-const loginUser = (loginData) => {
-  return User.findOne(loginData);
+const loginUser = async (loginData) => {
+  const user = await User.findOne(loginData);
+  if (user) return user;
+
+  throw new Error("User not found");
 };
+
 
 const modify = (where, data) => {
   // const updateData = Object.keys(data).reduce((obj, key) => {
