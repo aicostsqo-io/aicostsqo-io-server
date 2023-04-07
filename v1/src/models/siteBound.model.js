@@ -16,17 +16,18 @@ const SiteBoundSchema = Mongoose.Schema(
       {
         vertexNumber: Number,
         coordX: {
-          type: Mongoose.Types.Decimal128,
+          type: Number,
           required: true,
         },
         coordY: {
-          type: Mongoose.Types.Decimal128,
+          type: Number,
           required: true,
         },
         coordZ: {
-          type: Mongoose.Types.Decimal128,
-          required: true,
+          type: Number,
+          required: false,
         },
+        _id: false
       },
     ],
   },

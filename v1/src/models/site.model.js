@@ -4,7 +4,7 @@ const SiteSchema = Mongoose.Schema(
   {
     customerId: {
       type: Mongoose.Types.ObjectId,
-      ref: "customers",
+      ref: "users",
     },
     name: String,
     numberOfVertex: {
