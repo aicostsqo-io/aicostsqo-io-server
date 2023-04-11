@@ -49,9 +49,9 @@ const update = async (req, res) => {
   res.send(updatedUser);
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   if (!req.params?.id) throw new Error("ID field is required");
-  const deletedUser = remove(req.params.id);
+  const deletedUser = await remove(req.params.id);
   if (!deletedUser) throw new Error("User not found");
   res.send(deletedUser);
 };
