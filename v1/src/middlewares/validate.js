@@ -1,5 +1,3 @@
-const httpStatus = require("http-status");
-
 const validate = (schema) => (req, res, next) => {
   const { value, error } = schema.validate(req.body);
   if (error) {
@@ -7,8 +5,7 @@ const validate = (schema) => (req, res, next) => {
       ?.map((detail) => detail.message)
       .join(", ");
 
-    res.status(httpStatus.BAD_REQUEST).json({ error: errorMessage });
-    return;
+    throw new Error(errorMessage);
   }
 
   Object.assign(req, value);
