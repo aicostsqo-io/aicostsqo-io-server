@@ -1,3 +1,4 @@
 [submodule "alcostsqo-client"]
 	path = alcostsqo-client
 	url = https://github.com/mustafahincal/alcostsqo-client
+	branch = main
