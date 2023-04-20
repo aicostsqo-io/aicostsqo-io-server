@@ -5,6 +5,7 @@ const cors = require("cors");
 const loaders = require("./loaders");
 const { UserRoutes, SiteBoundsRoutes, SitesRoutes } = require("./routes");
 const errorHandler = require("./middlewares/errorHandler");
+const notFound = require("./middlewares/notFound");
 
 config();
 loaders();
@@ -19,6 +20,6 @@ app.listen(process.env.APP_PORT, () => {
   app.use("/api/users", UserRoutes);
   app.use("/api/siteBounds", SiteBoundsRoutes);
   app.use("/api/sites", SitesRoutes);
-
+  app.use(notFound);
   app.use(errorHandler);
 });
