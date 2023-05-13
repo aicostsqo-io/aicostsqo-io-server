@@ -15,30 +15,30 @@ const RpSchema = Mongoose.Schema(
       required: true,
     },
     volume: {
-      type: number,
+      type: Number,
     },
     sizeX: {
-      type: number,
+      type: Number,
       required: true,
     },
     sizeY: {
-      type: number,
+      type: Number,
       required: true,
     },
     sizeZ: {
-      type:number,
+      type: Number,
       required: true,
     },
     positionX: {
-      type: number,
+      type: Number,
       required: true,
     },
     positionY: {
-      type:number,
+      type: Number,
       required: true,
     },
     positionZ: {
-      type:number,
+      type: Number,
       required: true,
     },
     rotationX: {
