@@ -27,9 +27,24 @@ const SiteBoundSchema = Mongoose.Schema(
           type: Number,
           required: false,
         },
-        _id: false
+        _id: false,
       },
     ],
+    positionN: {
+      type: String,
+    },
+    positionE: {
+      type: String,
+    },
+    positionLong: {
+      type: String,
+    },
+    positionLat: {
+      type: String,
+    },
+    heading: {
+      type: Mongoose.Types.Decimal128,
+    },
   },
   { timestamps: true, versionKey: false }
 );

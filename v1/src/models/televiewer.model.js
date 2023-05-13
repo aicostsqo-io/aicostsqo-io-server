@@ -58,6 +58,15 @@ const TeleviewerSchema = Mongoose.Schema(
       min: 0,
       max: 360,
     },
+    holeNumber: Number,
+    xHole: String,
+    yHole: String,
+    zHole: String,
+    holeVerticalAngle: String,
+    direction: String,
+    lengthOfHole: Mongoose.Types.Decimal128,
+    diameterCore: Mongoose.Types.Decimal128,
+    explanation: String,
   },
   { timestamps: true, versionKey: false }
 );

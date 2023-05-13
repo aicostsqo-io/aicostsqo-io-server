@@ -6,6 +6,10 @@ const TeleviewerDiscSchema = Mongoose.Schema(
       type: Mongoose.Types.ObjectId,
       ref: "rps",
     },
+    siteId: {
+      type: Mongoose.Types.ObjectId,
+      ref: "sites",
+    },
     dip: Number,
     dipDirection: Number,
     pX: Mongoose.Types.Decimal128,
@@ -14,6 +18,10 @@ const TeleviewerDiscSchema = Mongoose.Schema(
     nX: Mongoose.Types.Decimal128,
     nY: Mongoose.Types.Decimal128,
     nZ: Mongoose.Types.Decimal128,
+    holeNumber: Number,
+    typeOfHole: String,
+    imageOrMeshOfFractureInterpolation: String,
+    explanation: String,
   },
   { timestamps: true, versionKey: false }
 );
