@@ -15,30 +15,30 @@ const RpSchema = Mongoose.Schema(
       required: true,
     },
     volume: {
-      type: Mongoose.Types.Decimal128,
+      type: number,
     },
     sizeX: {
-      type: Mongoose.Types.Decimal128,
+      type: number,
       required: true,
     },
     sizeY: {
-      type: Mongoose.Types.Decimal128,
+      type: number,
       required: true,
     },
     sizeZ: {
-      type: Mongoose.Types.Decimal128,
+      type:number,
       required: true,
     },
     positionX: {
-      type: Mongoose.Types.Decimal128,
+      type: number,
       required: true,
     },
     positionY: {
-      type: Mongoose.Types.Decimal128,
+      type:number,
       required: true,
     },
     positionZ: {
-      type: Mongoose.Types.Decimal128,
+      type:number,
       required: true,
     },
     rotationX: {

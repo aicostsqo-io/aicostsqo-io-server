@@ -32,15 +32,19 @@ const SiteBoundSchema = Mongoose.Schema(
     ],
     positionN: {
       type: String,
+      required:false
     },
     positionE: {
       type: String,
+      required:false
     },
     positionLong: {
       type: String,
+      required:false
     },
     positionLat: {
       type: String,
+      required:false
     },
     heading: {
       type: Mongoose.Types.Decimal128,
