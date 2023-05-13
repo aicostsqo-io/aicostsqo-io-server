@@ -2,7 +2,7 @@ const Mongoose = require("mongoose");
 
 const SiteBoundSchema = Mongoose.Schema(
   {
-    siteId: {
+    site: {
       type: Mongoose.Types.ObjectId,
       ref: "sites",
       required: true,
@@ -32,22 +32,23 @@ const SiteBoundSchema = Mongoose.Schema(
     ],
     positionN: {
       type: String,
-      required:false
+      required: false,
     },
     positionE: {
       type: String,
-      required:false
+      required: false,
     },
     positionLong: {
       type: String,
-      required:false
+      required: false,
     },
     positionLat: {
       type: String,
-      required:false
+      required: false,
     },
     heading: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
+      required: false,
     },
   },
   { timestamps: true, versionKey: false }
