@@ -1,4 +1,14 @@
-module.exports.UserRoutes = require("./users.routes");
-module.exports.SiteBoundsRoutes = require("./siteBounds.routes");
-module.exports.SitesRoutes = require("./sites.routes");
-module.exports.RpsRoutes = require("./rps.routes");
+const express = require('express'),
+  router = express.Router();
+
+const authenticateToken = require("../middlewares/authenticate");
+
+
+router.use("/auth", require("./auth.routes"));
+router.use("/users", require("./users.routes"));
+router.use("/siteBounds", authenticateToken, require("./siteBounds.routes"));
+router.use("/sites",authenticateToken,  require("./sites.routes"));
+router.use("/rps",authenticateToken, require("./rps.routes"));
+
+
+module.exports = router;
