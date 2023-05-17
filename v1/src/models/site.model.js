@@ -3,7 +3,7 @@ const Mongoose = require("mongoose");
 const SiteSchema = Mongoose.Schema(
   {
     customerId: {
-      type: Mongoose.Types.ObjectId,
+      type: Mongoose.Schema.Types.ObjectId,
       ref: "users",
     },
     name: String,

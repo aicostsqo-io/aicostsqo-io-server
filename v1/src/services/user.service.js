@@ -1,6 +1,5 @@
 const User = require("../models/user.model");
 
-
 const insert = async (data) => {
   const { email } = data;
   const userExists = await User.findOne({ email });
@@ -23,7 +22,6 @@ const loginUser = async (loginData) => {
   throw new Error("User not found");
 };
 
-
 const modify = (where, data) => {
   // const updateData = Object.keys(data).reduce((obj, key) => {
   //   if (key !== "password") obj[key] = data[key];
@@ -37,9 +35,9 @@ const remove = (id) => {
 };
 
 module.exports = {
-  insert,
-  list,
+  insertUser: insert,
+  listUsers: list,
   loginUser,
-  modify,
-  remove,
+  modifyUser: modify,
+  removeUser: remove,
 };

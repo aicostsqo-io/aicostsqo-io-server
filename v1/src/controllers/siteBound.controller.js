@@ -1,7 +1,10 @@
-const { insert, list } = require("../services/siteBound.service");
+const {
+  insertSiteBound,
+  listSiteBounds,
+} = require("../services/siteBound.service");
 
 const create = async (req, res) => {
-  const siteBound = await insert(req.body);
+  const siteBound = await insertSiteBound(req.body);
   res.send({
     siteBound,
     success: true,
@@ -10,7 +13,7 @@ const create = async (req, res) => {
 };
 
 const index = async (req, res) => {
-  const siteBounds = await list();
+  const siteBounds = await listSiteBounds();
   res.send({
     siteBounds,
     success: true,

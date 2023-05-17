@@ -2,7 +2,7 @@ const Mongoose = require("mongoose");
 
 const RpSchema = Mongoose.Schema(
   {
-    siteBoundId: {
+    siteBound: {
       type: Mongoose.Types.ObjectId,
       ref: "siteBounds",
     },

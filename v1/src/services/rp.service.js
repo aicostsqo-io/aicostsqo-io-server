@@ -15,8 +15,15 @@ const insert = async (data) => {
   throw new Error("Rp not created");
 };
 
+const getRpsBySiteBoundId = async (siteBoundId) => {
+  const rps = await Rp.find({ siteBound: siteBoundId });
+  if (rps) return rps;
+  throw new Error("Rps not found");
+};
+
 module.exports = {
   bulkDeleteRps,
-  list,
-  insert,
+  listRps: list,
+  insertRp: insert,
+  getRpsBySiteBoundId,
 };

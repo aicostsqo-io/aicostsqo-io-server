@@ -1,4 +1,4 @@
-const { list, bulkDeleteRps, insert } = require("../services/rp.service");
+const { listRps, bulkDeleteRps, insertRp } = require("../services/rp.service");
 
 const create = async (req, res) => {
   const rp = await insert(req.body);

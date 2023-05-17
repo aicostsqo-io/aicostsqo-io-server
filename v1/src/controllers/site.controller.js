@@ -1,40 +1,62 @@
-const { list, insert } = require("../services/site.service");
+const {
+  insertRp,
+  listRps,
+  getRpsBySiteBoundId,
+} = require("../services/rp.service");
+const { insertSite, listSites } = require("../services/site.service");
+const {
+  insertSiteBounds,
+  getSiteBoundBySiteId,
+} = require("../services/siteBound.service");
 
 const create = async (req, res) => {
-  const site = await insert(req.body);
-
-  /* const { site, siteBound, rp } = req.body;
-  const siteToInsert = await insertSite(site);
-  const siteBoundToInsert = await insertSiteBound({
-    ...siteBound,
-    site: siteToInsert._id,
-  });
-  const rpToInsert = await insertRP({
-    ...rp,
-    siteBound: siteBoundToInsert._id,
-  });
-
-  if (!siteToInsert || !siteBoundToInsert || !rpToInsert)
-    throw new Error("Site not created");
-  res.send({
-    site: siteToInsert,
-    siteBound: siteBoundToInsert,
-    rp: rpToInsert,
-    success: true,
-    message: "Site created successfully",
-  }); */
-
-  res.send({
-    site,
-    success: true,
-    message: "Site created successfully",
-  });
+  const { site, siteBound, rps } = req.body;
+  try {
+    const siteToInsert = await insertSite(site);
+    const siteBoundToInsert = await insertSiteBounds({
+      site: siteToInsert._id,
+      ...siteBound,
+    });
+    const rpsToInsert = await Promise.all(
+      rps.map(async (rp) => {
+        return await insertRp({
+          siteBound: siteBoundToInsert._id,
+          ...rp,
+        });
+      })
+    );
+    res.send({
+      site: siteToInsert,
+      siteBound: siteBoundToInsert,
+      rps: rpsToInsert,
+      success: true,
+      message: "Site created successfully",
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      message: err.message,
+    });
+  }
 };
 
 const index = async (req, res) => {
-  const sites = await list();
+  const sites = await listSites();
+
+  const siteData = await Promise.all(
+    sites.map(async (site) => {
+      console.log(site);
+      const siteBound = await getSiteBoundBySiteId(site._id);
+      const rps = await getRpsBySiteBoundId(siteBound._id);
+      return {
+        site,
+        siteBound,
+        rps,
+      };
+    })
+  );
   res.send({
-    sites,
+    siteData,
     success: true,
     message: "Sites listed successfully",
   });
