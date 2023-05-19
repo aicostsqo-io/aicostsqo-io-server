@@ -55,11 +55,7 @@ const index = async (req, res) => {
       };
     })
   );
-  res.send({
-    siteData,
-    success: true,
-    message: "Sites listed successfully",
-  });
+  res.send(siteData);
 };
 
 module.exports = {
