@@ -13,9 +13,7 @@ const authenticateToken = require("../middlewares/authenticate");
 const router = express.Router();
 
 router.route("/").get(errorCatcher(index));
-router
-  .route("/")
-  .post(validate(UserValidation.create), errorCatcher(create));
+router.route("/").post(validate(UserValidation.create), errorCatcher(create));
 router
   .route("/")
   .patch(

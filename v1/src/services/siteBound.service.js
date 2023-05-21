@@ -19,7 +19,7 @@ const list = async () => {
 };
 
 module.exports = {
-  insertSiteBounds: insert,
+  insertSiteBound: insert,
   listSiteBounds: list,
   getSiteBoundBySiteId,
 };

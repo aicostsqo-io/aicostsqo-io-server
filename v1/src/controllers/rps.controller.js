@@ -1,7 +1,7 @@
 const { listRps, bulkDeleteRps, insertRp } = require("../services/rp.service");
 
 const create = async (req, res) => {
-  const rp = await insert(req.body);
+  const rp = await insertRp(req.body);
   res.send({
     rp,
     success: true,
@@ -18,7 +18,7 @@ const bulkDelete = async (req, res) => {
 };
 
 const index = async (req, res) => {
-  const rps = await list();
+  const rps = await listRps();
   res.send({
     rps,
     success: true,

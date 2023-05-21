@@ -1,8 +1,4 @@
-const {
-  passwordToHash,
-  generateAccessToken,
-  generateRefreshToken,
-} = require("../scripts/utils/helper");
+const { passwordToHash } = require("../scripts/utils/helper");
 const {
   insertUser,
   listUsers,

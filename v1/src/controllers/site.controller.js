@@ -1,11 +1,7 @@
-const {
-  insertRp,
-  listRps,
-  getRpsBySiteBoundId,
-} = require("../services/rp.service");
+const { insertRp, getRpsBySiteBoundId } = require("../services/rp.service");
 const { insertSite, listSites } = require("../services/site.service");
 const {
-  insertSiteBounds,
+  insertSiteBound,
   getSiteBoundBySiteId,
 } = require("../services/siteBound.service");
 
@@ -13,7 +9,7 @@ const create = async (req, res) => {
   const { site, siteBound, rps } = req.body;
   try {
     const siteToInsert = await insertSite(site);
-    const siteBoundToInsert = await insertSiteBounds({
+    const siteBoundToInsert = await insertSiteBound({
       site: siteToInsert._id,
       ...siteBound,
     });
@@ -33,7 +29,7 @@ const create = async (req, res) => {
       message: "Site created successfully",
     });
   } catch (err) {
-    res.send({
+    res.status(500).send({
       success: false,
       message: err.message,
     });
@@ -45,7 +41,6 @@ const index = async (req, res) => {
 
   const siteData = await Promise.all(
     sites.map(async (site) => {
-      console.log(site);
       const siteBound = await getSiteBoundBySiteId(site._id);
       const rps = await getRpsBySiteBoundId(siteBound._id);
       return {

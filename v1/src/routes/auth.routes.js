@@ -6,7 +6,8 @@ const express = require("express");
 
 const router = express.Router();
 
-router.route("/login").post(validate(userValidation.login), errorCatcher(login));
-
+router
+  .route("/login")
+  .post(validate(userValidation.login), errorCatcher(login));
 
 module.exports = router;
