@@ -12,7 +12,14 @@ const list = async () => {
   throw new Error("Sites not found");
 };
 
+const get = async (id) => {
+  const site = await Site.findById(id);
+  if (site) return site;
+  throw new Error("Site not found");
+};
+
 module.exports = {
   insertSite: insert,
   listSites: list,
+  getSite: get,
 };

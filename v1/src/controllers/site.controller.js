@@ -1,5 +1,5 @@
 const { insertRp, getRpsBySiteBoundId } = require("../services/rp.service");
-const { insertSite, listSites } = require("../services/site.service");
+const { insertSite, listSites, getSite } = require("../services/site.service");
 const {
   insertSiteBound,
   getSiteBoundBySiteId,
@@ -36,7 +36,7 @@ const create = async (req, res) => {
   }
 };
 
-const index = async (req, res) => {
+const list = async (req, res) => {
   const sites = await listSites();
 
   const siteData = await Promise.all(
@@ -53,7 +53,20 @@ const index = async (req, res) => {
   res.send(siteData);
 };
 
+const get = async (req, res) => {
+  const { id } = req.params;
+  const site = await getSite(id);
+  const siteBound = await getSiteBoundBySiteId(site._id);
+  const rps = await getRpsBySiteBoundId(siteBound._id);
+  res.send({
+    site,
+    siteBound,
+    rps,
+  });
+};
+
 module.exports = {
   create,
-  index,
+  list,
+  get,
 };
