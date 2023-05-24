@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const insert = async (data) => {
   const { email } = data;
   const userExists = await User.findOne({ email });
+  console.log("userExists: ", userExists);
   if (userExists) {
     throw new Error("User Already Exists");
   }
@@ -16,10 +17,12 @@ const list = () => {
 };
 
 const loginUser = async (loginData) => {
-  const user = await User.findOne(loginData);
-  if (user) return user;
+  const { email, password } = loginData;
+  const user = await User.findOne({ email });
+  if (!user) throw new Error("User not found");
+  if (password !== user.password) throw new Error("Password is wrong");
 
-  throw new Error("User not found");
+  if (user) return user;
 };
 
 const modify = (where, data) => {
