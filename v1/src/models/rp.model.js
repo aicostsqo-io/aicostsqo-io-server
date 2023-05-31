@@ -6,6 +6,10 @@ const RpSchema = Mongoose.Schema(
       type: Mongoose.Types.ObjectId,
       ref: "siteBounds",
     },
+    name: {
+      type: String,
+      required: false,
+    },
     slopeAngle: {
       type: Number,
       required: true,
