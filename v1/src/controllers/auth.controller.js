@@ -5,7 +5,7 @@ const {
 } = require("../scripts/utils/helper");
 const { loginUser } = require("../services/user.service");
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   try {
     req.body.password = passwordToHash(req.body.password);
     let user = await loginUser({
@@ -26,10 +26,7 @@ const login = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).send({
-      success: false,
-      message: err.message,
-    });
+    next(err);
   }
 };
 

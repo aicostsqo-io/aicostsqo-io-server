@@ -1,9 +1,8 @@
-module.exports = (error, req, res, next) => {
-  res.status(error.status || 500);
+module.exports = (err, req, res, next) => {
+  res.status(err.status || 500);
+
   res.json({
-    success: false,
-    error: {
-      message: error.message || "Internal Server Error...",
-    },
+    message: err.message,
+    error: err,
   });
 };
