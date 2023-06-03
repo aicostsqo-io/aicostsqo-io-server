@@ -17,7 +17,10 @@ app.use(helmet());
 
 app.listen(process.env.APP_PORT, () => {
   console.log("SERVER RUNNING ON :" + process.env.APP_PORT);
-  app.use("/api",require('./routes'));
+  app.use("/api/test", (req, res) => {
+    res.send("Hello World");
+  });
+  app.use("/api", require("./routes"));
   app.use(notFound);
   app.use(errorHandler);
 });
