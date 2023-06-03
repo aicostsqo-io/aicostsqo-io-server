@@ -12,19 +12,16 @@ const bulkDeleteRps = async (rps) => {
 const insert = async (rpData) => {
   console.log("rpData: ", rpData);
 
-  const rpCount = await Rp.countDocuments({ siteBound: rpData.siteBound });
-  console.log("rpCount: ", rpCount);
+  /* const rpCount = await Rp.countDocuments({ siteBound: rpData.siteBound });
+  rpData.name = "RP " + String(rpCount + 1).padStart(3, "0"); */
 
-  rpData.name = "RP " + String(rpCount + 1).padStart(3, "0");
   const rp = await Rp.create(rpData);
-
-  console.log("rp: ", rp);
   if (rp) return rp;
   throw new Error("Rp not created");
 };
 
 const getRpsBySiteBoundId = async (siteBoundId) => {
-  const rps = await Rp.find({ siteBound: siteBoundId });
+  const rps = await Rp.find({ siteBound: siteBoundId }).sort({ name: 1 });
   if (rps) return rps;
   throw new Error("Rps not found");
 };
