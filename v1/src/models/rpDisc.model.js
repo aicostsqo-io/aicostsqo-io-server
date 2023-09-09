@@ -38,6 +38,10 @@ const RpDiscSchema = Mongoose.Schema(
       type: Mongoose.Types.Decimal128,
       required: true,
     },
+    type: {
+      type: String,
+      enum: ["Determinisctic", "Stokastic"],
+    },
   },
   { timestamps: true, versionKey: false }
 );

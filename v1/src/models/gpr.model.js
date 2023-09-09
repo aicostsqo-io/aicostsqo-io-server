@@ -20,12 +20,12 @@ const GprSchema = Mongoose.Schema(
     positionY: Mongoose.Types.Decimal128,
     positionZ: Mongoose.Types.Decimal128,
     antenna: String,
-    LongitudinalProfilesDirectory: String,
-    LongitudinalProfilesMaxDepth: Mongoose.Types.Decimal128,
-    LongitudinalProfilesMaxDistance: Mongoose.Types.Decimal128,
-    TraversalProfilesDirectory: String,
-    TraversalProfilesMaxDepth: Mongoose.Types.Decimal128,
-    TraversalProfilesMaxDistance: Mongoose.Types.Decimal128,
+    longitudinalProfilesDirectory: String,
+    longitudinalProfilesMaxDepth: Mongoose.Types.Decimal128,
+    longitudinalProfilesMaxDistance: Mongoose.Types.Decimal128,
+    traversalProfilesDirectory: String,
+    traversalProfilesMaxDepth: Mongoose.Types.Decimal128,
+    traversalProfilesMaxDistance: Mongoose.Types.Decimal128,
   },
   { timestamps: true, versionKey: false }
 );

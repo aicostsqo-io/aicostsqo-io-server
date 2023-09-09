@@ -50,6 +50,10 @@ const SiteBoundSchema = Mongoose.Schema(
       type: Number,
       required: false,
     },
+    backboneExtractionOrIntegration: {
+      type: String,
+      enum: ["Extraction", "Integration"],
+    },
   },
   { timestamps: true, versionKey: false }
 );
