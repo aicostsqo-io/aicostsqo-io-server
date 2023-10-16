@@ -1,10 +1,10 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const RpDiscSchema = Mongoose.Schema(
   {
     rpId: {
       type: Mongoose.Types.ObjectId,
-      ref: "rps",
+      ref: 'rps',
     },
     dip: {
       type: Number,
@@ -15,35 +15,35 @@ const RpDiscSchema = Mongoose.Schema(
       required: true,
     },
     pX: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     pY: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     pZ: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     nX: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     nY: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     nZ: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     type: {
       type: String,
-      enum: ["Determinisctic", "Stokastic"],
+      enum: ['Determinisctic', 'Stokastic'],
     },
   },
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("rpDiscs", RpDiscSchema);
+module.exports = Mongoose.model('rpDiscs', RpDiscSchema);
