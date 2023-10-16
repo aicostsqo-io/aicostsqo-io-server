@@ -1,10 +1,10 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const DfnSchema = Mongoose.Schema(
   {
     siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "sites",
+      ref: 'sites',
       required: true,
     },
     discontinuitySetId: Number,
@@ -12,28 +12,28 @@ const DfnSchema = Mongoose.Schema(
     type: String,
     dip: Number,
     dipDirection: Number,
-    expectationTraceLength: Mongoose.types.Decimal128,
-    spacing: Mongoose.types.Decimal128,
-    fisherK: Mongoose.types.Decimal128,
+    expectationTraceLength: Number,
+    spacing: Number,
+    fisherK: Number,
     frictionAngle: Number,
     location: String,
     persistence: String,
     orientation: String,
     fractureIntensity: String,
-    positionX: Mongoose.types.Decimal128,
-    positionY: Mongoose.types.Decimal128,
-    positionZ: Mongoose.types.Decimal128,
-    vertex2x: Mongoose.types.Decimal128,
-    vertex2y: Mongoose.types.Decimal128,
-    vertex2z: Mongoose.types.Decimal128,
-    vertex3x: Mongoose.types.Decimal128,
-    vertex3y: Mongoose.types.Decimal128,
-    vertex3z: Mongoose.types.Decimal128,
-    vertex4x: Mongoose.types.Decimal128,
-    vertex4y: Mongoose.types.Decimal128,
-    vertex4z: Mongoose.types.Decimal128,
+    positionX: Number,
+    positionY: Number,
+    positionZ: Number,
+    vertex2x: Number,
+    vertex2y: Number,
+    vertex2z: Number,
+    vertex3x: Number,
+    vertex3y: Number,
+    vertex3z: Number,
+    vertex4x: Number,
+    vertex4y: Number,
+    vertex4z: Number,
   },
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("dfns", DfnSchema);
+module.exports = Mongoose.model('dfns', DfnSchema);
