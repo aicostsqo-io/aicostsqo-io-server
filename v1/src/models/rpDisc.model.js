@@ -8,39 +8,40 @@ const RpDiscSchema = Mongoose.Schema(
     },
     dip: {
       type: Number,
-      required: true,
+      required: false,
     },
     dipDirect: {
       type: Number,
-      required: true,
+      required: false,
     },
     pX: {
       type: Number,
-      required: true,
+      required: false,
     },
     pY: {
       type: Number,
-      required: true,
+      required: false,
     },
     pZ: {
       type: Number,
-      required: true,
+      required: false,
     },
     nX: {
       type: Number,
-      required: true,
+      required: false,
     },
     nY: {
       type: Number,
-      required: true,
+      required: false,
     },
     nZ: {
       type: Number,
-      required: true,
+      required: false,
     },
     type: {
       type: String,
-      enum: ['Determinisctic', 'Stokastic'],
+      enum: ['Deterministic', 'Stochastic'],
+      required: false,
     },
   },
   { timestamps: true, versionKey: false }
