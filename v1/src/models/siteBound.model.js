@@ -7,6 +7,10 @@ const SiteBoundSchema = Mongoose.Schema(
       ref: "sites",
       required: true,
     },
+    backboneExtractionOrIntegration: {
+      type: String,
+      enum: ["Extraction", "Integration"],
+    },
     mapReferenceSystem: {
       type: String,
       enum: ["WGS-84", "ECET"],
@@ -30,30 +34,6 @@ const SiteBoundSchema = Mongoose.Schema(
         _id: false,
       },
     ],
-    positionN: {
-      type: String,
-      required: false,
-    },
-    positionE: {
-      type: String,
-      required: false,
-    },
-    positionLong: {
-      type: String,
-      required: false,
-    },
-    positionLat: {
-      type: String,
-      required: false,
-    },
-    heading: {
-      type: Number,
-      required: false,
-    },
-    backboneExtractionOrIntegration: {
-      type: String,
-      enum: ["Extraction", "Integration"],
-    },
   },
   { timestamps: true, versionKey: false }
 );

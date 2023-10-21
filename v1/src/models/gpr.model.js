@@ -1,10 +1,10 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const GprSchema = Mongoose.Schema(
   {
     siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "sites",
+      ref: 'sites',
     },
     rectangleNumber: Number,
     shape: String,
@@ -14,7 +14,7 @@ const GprSchema = Mongoose.Schema(
     spacing: Mongoose.Types.Decimal128,
     dimension: {
       type: String,
-      enum: ["1D", "2D", "3D"],
+      enum: ['1D', '2D', '3D'],
     },
     positionX: Mongoose.Types.Decimal128,
     positionY: Mongoose.Types.Decimal128,
@@ -26,8 +26,39 @@ const GprSchema = Mongoose.Schema(
     traversalProfilesDirectory: String,
     traversalProfilesMaxDepth: Mongoose.Types.Decimal128,
     traversalProfilesMaxDistance: Mongoose.Types.Decimal128,
+    mapReferenceSystemForStartOfLongitudinalProfiles: Number,
+    mapReferenceSystemForStartOfTransversalProfiles: Number,
+    vertex1: {
+      startOfLongitudinalProfilesX: Number,
+      startOfLongitudinalProfilesY: Number,
+      startOfLongitudinalProfilesZ: Number,
+      endOfLongitudinalProfilesX: Number,
+      endOfLongitudinalProfilesY: Number,
+      endOfLongitudinalProfilesZ: Number,
+      startOfTraversalProfilesX: Number,
+      startOfTraversalProfilesY: Number,
+      startOfTraversalProfilesZ: Number,
+      endOfTraversalProfilesX: Number,
+      endOfTraversalProfilesY: Number,
+      endOfTraversalProfilesZ: Number,
+    },
+    vertex2: {
+      startOfLongitudinalProfilesX: Number,
+      startOfLongitudinalProfilesY: Number,
+      startOfLongitudinalProfilesZ: Number,
+      endOfLongitudinalProfilesX: Number,
+      endOfLongitudinalProfilesY: Number,
+      endOfLongitudinalProfilesZ: Number,
+      startOfTraversalProfilesX: Number,
+      startOfTraversalProfilesY: Number,
+      startOfTraversalProfilesZ: Number,
+      endOfTraversalProfilesX: Number,
+      endOfTraversalProfilesY: Number,
+      endOfTraversalProfilesZ: Number,
+    },
+    explanation: String,
   },
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("gprs", GprSchema);
+module.exports = Mongoose.model('gprs', GprSchema);
