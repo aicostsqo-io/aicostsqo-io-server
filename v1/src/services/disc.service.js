@@ -1,8 +1,6 @@
 const RPDisc = require('../models/rpDisc.model');
 
 const insert = async (discData) => {
-  console.log('discData: ', discData);
-
   const disc = await RPDisc.create(discData);
   if (disc) return disc;
   throw new Error('Disc not created');
