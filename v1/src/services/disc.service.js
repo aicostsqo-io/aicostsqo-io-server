@@ -18,8 +18,13 @@ const getDiscsByRpId = async (rpId) => {
   throw new Error('Discs not found');
 };
 
+const bulkDeleteRpDiscs = async (rps) => {
+  const result = await RPDisc.deleteMany({ _id: { $in: rps } });
+};
+
 module.exports = {
   insertDisc: insert,
   listDiscs: list,
   getDiscsByRpId,
+  bulkDeleteRpDiscs,
 };

@@ -2,6 +2,7 @@ const {
   listDiscs,
   getDiscsByRpId,
   insertDisc,
+  bulkDeleteRpDiscs,
 } = require('../services/disc.service');
 
 const index = async (req, res) => {
@@ -29,8 +30,17 @@ const create = async (req, res) => {
   });
 };
 
+const bulkDelete = async (req, res) => {
+  await bulkDeleteRpDiscs(req.body);
+  res.send({
+    success: true,
+    message: 'Deleted successfully',
+  });
+};
+
 module.exports = {
   index,
   listByRpId,
   create,
+  bulkDelete,
 };
