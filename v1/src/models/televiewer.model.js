@@ -1,14 +1,14 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const TeleviewerSchema = Mongoose.Schema(
   {
-    siteBoundId: {
+    siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "siteBounds",
+      ref: 'sites',
     },
     type: {
       type: String,
-      enum: ["Optical", "Acoustic"],
+      enum: ['Optical', 'Acoustic'],
     },
     sizeX: {
       type: Mongoose.Types.Decimal128,
@@ -67,8 +67,13 @@ const TeleviewerSchema = Mongoose.Schema(
     lengthOfHole: Mongoose.Types.Decimal128,
     diameterCore: Mongoose.Types.Decimal128,
     explanation: String,
+    imageDimensionA: Number,
+    imageDimensionB: Number,
+    perimeterX: Number,
+    zSliceZ: Number,
+    radiusPixels: Number,
   },
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("televiewers", TeleviewerSchema);
+module.exports = Mongoose.model('televiewers', TeleviewerSchema);

@@ -1,10 +1,10 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const ResistivitySchema = Mongoose.Schema(
   {
     siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "sites",
+      ref: 'sites',
       required: true,
     },
     resistivityMeasurementId: {
@@ -21,10 +21,9 @@ const ResistivitySchema = Mongoose.Schema(
     distance: Mongoose.Types.Decimal128,
     resistivity: Mongoose.Types.Decimal128,
     resistivityProfileDirectory: String,
-    magnetometricProfileDirectory: String,
     explanation: String,
   },
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("resistivities", ResistivitySchema);
+module.exports = Mongoose.model('resistivities', ResistivitySchema);

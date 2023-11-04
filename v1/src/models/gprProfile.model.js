@@ -22,6 +22,8 @@ const GprProfileSchema = Mongoose.Schema(
     endVertexX: Number,
     endVertexY: Number,
     endVertexZ: Number,
+    frequency: Number,
+    filname: String,
   },
   { timestamps: true, versionKey: false }
 );

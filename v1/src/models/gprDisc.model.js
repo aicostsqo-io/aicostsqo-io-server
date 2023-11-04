@@ -22,6 +22,9 @@ const GprDiscSchema = Mongoose.Schema({
   endVertexX: Number,
   endVertexY: Number,
   endVertexZ: Number,
+  nX: Number,
+  nY: Number,
+  nZ: Number,
 });
 
 const GprDiscModel = Mongoose.model('gprDiscs', GprDiscSchema);

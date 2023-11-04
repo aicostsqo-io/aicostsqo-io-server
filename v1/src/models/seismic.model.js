@@ -1,24 +1,25 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const SeismicSchema = Mongoose.Schema(
   {
     siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "sites",
+      ref: 'sites',
     },
     measurementId: Number,
     shape: String,
     profilNumber: Number,
     geophones: Number,
-    spacing: Mongoose.Types.Decimal128,
+    spacing: Number,
     shots: Number,
     length: Number,
     locationAngle: Number,
-    profileLocationX: Mongoose.Types.Decimal128,
-    profileLocationY: Mongoose.Types.Decimal128,
-    profileLocationZ: Mongoose.Types.Decimal128,
+    profileLocationX: Number,
+    profileLocationY: Number,
+    profileLocationZ: Number,
+    endOfTheSeismicProfile: Number,
   },
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("seismics", SeismicSchema);
+module.exports = Mongoose.model('seismics', SeismicSchema);

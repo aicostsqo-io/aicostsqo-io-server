@@ -1,14 +1,14 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const TeleviewerDiscSchema = Mongoose.Schema(
   {
     rpId: {
       type: Mongoose.Types.ObjectId,
-      ref: "rps",
+      ref: 'rps',
     },
     siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "sites",
+      ref: 'sites',
     },
     dip: Number,
     dipDirection: Number,
@@ -22,8 +22,9 @@ const TeleviewerDiscSchema = Mongoose.Schema(
     typeOfHole: String,
     imageOrMeshOfFractureInterpolation: String,
     explanation: String,
+    zAdjust: Number,
   },
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("televiewerDiscs", TeleviewerDiscSchema);
+module.exports = Mongoose.model('televiewerDiscs', TeleviewerDiscSchema);

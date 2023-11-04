@@ -20,6 +20,7 @@ const RpSchema = Mongoose.Schema(
     },
     volume: {
       type: Number,
+      required: false,
     },
     sizeX: {
       type: Number,
@@ -47,15 +48,15 @@ const RpSchema = Mongoose.Schema(
     },
     rotationX: {
       type: Number,
-      required: true,
+      required: false,
     },
     rotationY: {
       type: Number,
-      required: true,
+      required: false,
     },
     rotationZ: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   { timestamps: true, versionKey: false }
