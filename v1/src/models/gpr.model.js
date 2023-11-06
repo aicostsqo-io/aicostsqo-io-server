@@ -26,8 +26,14 @@ const GprSchema = Mongoose.Schema(
     traversalProfilesDirectory: String,
     traversalProfilesMaxDepth: Mongoose.Types.Decimal128,
     traversalProfilesMaxDistance: Mongoose.Types.Decimal128,
-    mapReferenceSystemForStartOfLongitudinalProfiles: Number,
-    mapReferenceSystemForStartOfTransversalProfiles: Number,
+    mapReferenceSystemForStartOfLongitudinalProfiles: {
+      type: String,
+      enum: ['GPS', 'WGS84', 'ITRF96'],
+    },
+    mapReferenceSystemForStartOfTransversalProfiles: {
+      type: String,
+      enum: ['GPS', 'WGS84', 'ITRF96'],
+    },
     vertex1: {
       startOfLongitudinalProfilesX: Number,
       startOfLongitudinalProfilesY: Number,

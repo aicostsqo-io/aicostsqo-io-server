@@ -1,9 +1,9 @@
 const Mongoose = require('mongoose');
 
 const GprDiscSchema = Mongoose.Schema({
-  siteId: {
+  gprId: {
     type: Mongoose.Types.ObjectId,
-    ref: 'sites',
+    ref: 'gprs',
   },
   rectangleLineNumber: { type: Number },
   profileType: {
@@ -11,8 +11,14 @@ const GprDiscSchema = Mongoose.Schema({
     enum: ['Longitudinal', 'Traversal'],
   },
   crackProfileNumber: Number,
-  typeOfCrack: { type: String },
-  typeOfDisc: { type: String },
+  typeOfCrack: {
+    type: String,
+    enum: ['Main Crack', 'Crack Zone'],
+  },
+  typeOfDisc: {
+    type: String,
+    enum: ['Circular', 'Quadratic', 'Triangular', 'Other'],
+  },
   dip: { type: Number },
   dipDirection: { type: Number },
   mapReferenceSystem: { type: Number },
