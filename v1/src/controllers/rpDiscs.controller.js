@@ -3,7 +3,7 @@ const {
   getDiscsByRpId,
   insertDisc,
   bulkDeleteRpDiscs,
-} = require('../services/disc.service');
+} = require('../services/rpDisc.service');
 
 const index = async (req, res) => {
   const discs = await listDiscs();

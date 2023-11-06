@@ -6,6 +6,12 @@ const insert = async (discData) => {
   throw new Error('Disc not created');
 };
 
+const insertDiscs = async (discsData) => {
+  const discs = await RPDisc.insertMany(discsData);
+  if (discs) return discs;
+  throw new Error('Discs are not created');
+};
+
 const list = async () => {
   const discs = await RPDisc.find();
   if (discs) return discs;
@@ -19,11 +25,12 @@ const getDiscsByRpId = async (rpId) => {
 };
 
 const bulkDeleteRpDiscs = async (rps) => {
-  const result = await RPDisc.deleteMany({ _id: { $in: rps } });
+  await RPDisc.deleteMany({ _id: { $in: rps } });
 };
 
 module.exports = {
   insertDisc: insert,
+  insertDiscs: insertDiscs,
   listDiscs: list,
   getDiscsByRpId,
   bulkDeleteRpDiscs,

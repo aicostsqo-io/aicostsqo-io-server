@@ -4,7 +4,7 @@ const {
   listByRpId,
   create,
   bulkDelete,
-} = require('../controllers/discs.controller');
+} = require('../controllers/rpDiscs.controller');
 const errorCatcher = require('../scripts/utils/errorCatcher');
 
 const router = express.Router();

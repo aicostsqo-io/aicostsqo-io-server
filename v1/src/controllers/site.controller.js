@@ -1,5 +1,5 @@
 const { insertRp, getRpsBySiteBoundId } = require('../services/rp.service');
-const { insertDisc } = require('../services/disc.service');
+const { insertDiscs } = require('../services/rpDisc.service');
 const { insertSite, listSites, getSite } = require('../services/site.service');
 const {
   insertSiteBound,
