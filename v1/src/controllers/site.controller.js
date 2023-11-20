@@ -34,9 +34,17 @@ const create = async (req, res) => {
       ...rest,
     });
 
-    await insertGprDiscs(discs.map((d) => ({ gprId: createdGpr._id, ...d })));
+    await insertGprDiscs(
+      discs.map((d) => ({
+        rectangleLineNumber: createdGpr.rectangleNumber,
+        ...d,
+      }))
+    );
     await insertGprProfiles(
-      profiles.map((p) => ({ gprId: createdGpr._id, ...p }))
+      profiles.map((p) => ({
+        rectangleLineNumber: createdGpr.rectangleNumber,
+        ...p,
+      }))
     );
   }
 

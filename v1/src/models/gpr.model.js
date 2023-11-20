@@ -7,7 +7,10 @@ const GprSchema = Mongoose.Schema(
       ref: 'sites',
     },
     rectangleNumber: Number,
-    shape: String,
+    shape: {
+      type: String,
+      enum: ['Circular', 'Triangular', 'Quadratic'],
+    },
     longitudinalProfileNumber: Number,
     traversalProfileNumber: Number,
     distance: Mongoose.Types.Decimal128,
