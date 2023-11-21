@@ -6,6 +6,13 @@ const insertProfiles = async (gprProfileData) => {
   throw new Error('GprProfiles are not created');
 };
 
+const getBySiteId = async (siteId) => {
+  const gprProfiles = await GprProfile.find({ siteId });
+  if (gprProfiles) return gprProfiles;
+  throw new Error('Gpr profiles not found');
+};
+
 module.exports = {
   insertGprProfiles: insertProfiles,
+  getBySiteId,
 };

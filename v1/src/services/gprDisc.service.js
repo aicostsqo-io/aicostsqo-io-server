@@ -6,6 +6,13 @@ const insertDiscs = async (gprDiscData) => {
   throw new Error('GprDiscs are not created');
 };
 
+const getBySiteId = async (siteId) => {
+  const gprDiscs = await GprDisc.find({ siteId });
+  if (gprDiscs) return gprDiscs;
+  throw new Error('Gpr discs not found');
+};
+
 module.exports = {
   insertGprDiscs: insertDiscs,
+  getBySiteId,
 };

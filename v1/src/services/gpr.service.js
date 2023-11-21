@@ -6,6 +6,13 @@ const insert = async (gprData) => {
   throw new Error('Gpr not created');
 };
 
+const getBySiteId = async (siteId) => {
+  const gprs = await Gpr.find({ siteId });
+  if (gprs) return gprs;
+  throw new Error('Gprs not found');
+};
+
 module.exports = {
   insertGpr: insert,
+  getBySiteId,
 };
