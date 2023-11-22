@@ -16,7 +16,7 @@ const MagnetometricDiscProfileSchema = Mongoose.Schema(
     typeOfDisc: { type: String },
     dip: { type: Number },
     dipDirection: { type: Number },
-    mapReferenceSystem: { type: Number },
+    mapReferenceSystem: { type: String },
     startingVertexX: Number,
     startingVertexY: Number,
     startingVertexZ: Number,
