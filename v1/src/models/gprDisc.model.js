@@ -1,9 +1,9 @@
 const Mongoose = require('mongoose');
 
 const GprDiscSchema = Mongoose.Schema({
-  gprId: {
+  siteId: {
     type: Mongoose.Types.ObjectId,
-    ref: 'gprs',
+    ref: 'sites',
   },
   rectangleLineNumber: { type: Number },
   profileType: {
