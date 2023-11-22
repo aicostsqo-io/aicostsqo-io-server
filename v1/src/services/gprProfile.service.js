@@ -1,5 +1,11 @@
 const GprProfile = require('../models/gprProfile.model');
 
+const insert = async (gprProfileData) => {
+  const gprProfile = await GprProfile.create(gprProfileData);
+  if (gprProfile) return gprProfile;
+  throw new Error('GprProfile is not created');
+};
+
 const insertProfiles = async (gprProfileData) => {
   const gprProfiles = await GprProfile.insertMany(gprProfileData);
   if (gprProfiles) return gprProfiles;
@@ -15,4 +21,5 @@ const getBySiteId = async (siteId) => {
 module.exports = {
   insertGprProfiles: insertProfiles,
   getBySiteId,
+  insert,
 };
