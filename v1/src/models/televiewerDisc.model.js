@@ -2,10 +2,10 @@ const Mongoose = require('mongoose');
 
 const TeleviewerDiscSchema = Mongoose.Schema(
   {
-    rpId: {
-      type: Mongoose.Types.ObjectId,
-      ref: 'rps',
-    },
+    // rpId: {
+    //   type: Mongoose.Types.ObjectId,
+    //   ref: 'rps',
+    // },
     siteId: {
       type: Mongoose.Types.ObjectId,
       ref: 'sites',

@@ -9,7 +9,7 @@ const SeismicDiscProfileSchema = Mongoose.Schema(
     rectangleLineNumber: { type: Number },
     profileType: {
       type: String,
-      enum: ['Longitudinal', 'Traversal'],
+      enum: ['Longitudinal', 'Traversal', 'Line'],
     },
     crackProfileNumber: Number,
     typeOfCrack: { type: String },

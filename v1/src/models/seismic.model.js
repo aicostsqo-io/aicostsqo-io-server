@@ -7,7 +7,10 @@ const SeismicSchema = Mongoose.Schema(
       ref: 'sites',
     },
     measurementId: Number,
-    shape: String,
+    shape: {
+      type: String,
+      enum: ['Line', 'Mesh'],
+    },
     profilNumber: Number,
     geophones: Number,
     spacing: Number,

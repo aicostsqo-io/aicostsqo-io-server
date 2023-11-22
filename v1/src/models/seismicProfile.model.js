@@ -1,13 +1,16 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const SeismicProfileSchema = Mongoose.Schema(
   {
     siteId: {
       type: Mongoose.Types.ObjectId,
-      ref: "sites",
+      ref: 'sites',
     },
     seismicMeasurementId: Number,
-    shape: String,
+    shape: {
+      type: String,
+      enum: ['Line', 'Mesh'],
+    },
     profileNumber: Number,
     endsOfSeismicProfile: Number,
     seismicProfileDirectory: String,
@@ -16,4 +19,4 @@ const SeismicProfileSchema = Mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("seismicProfiles", SeismicProfileSchema);
+module.exports = Mongoose.model('seismicProfiles', SeismicProfileSchema);
