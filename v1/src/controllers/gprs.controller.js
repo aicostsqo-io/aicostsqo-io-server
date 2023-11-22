@@ -1,8 +1,13 @@
-const { getBySiteId: getGprs, insertGpr } = require('../services/gpr.service');
+const {
+  getBySiteId: getGprs,
+  insertGpr,
+  bulkDelete: removeGprs,
+} = require('../services/gpr.service');
 const { getBySiteId: getDiscs } = require('../services/gprDisc.service');
 const {
   getBySiteId: getProfiles,
   insert: insertGprProfile,
+  bulkDelete: removeGprProfiles,
 } = require('../services/gprProfile.service');
 
 const create = async (req, res) => {
@@ -22,6 +27,23 @@ const createGprProfile = async (req, res) => {
     result: gprProfile,
     success: true,
     message: 'Gpr profile created successfully',
+  });
+};
+
+const deleteGprs = async (req, res) => {
+  const { body } = req;
+  await removeGprs(body);
+  res.send({
+    success: true,
+    message: 'Gpr profile deleted successfully',
+  });
+};
+const deleteGprProfiles = async (req, res) => {
+  const { body } = req;
+  await removeGprProfiles(body);
+  res.send({
+    success: true,
+    message: 'Gpr profile deleted successfully',
   });
 };
 
@@ -46,4 +68,6 @@ module.exports = {
   getBySiteId,
   create,
   createGprProfile,
+  deleteGprs,
+  deleteGprProfiles,
 };

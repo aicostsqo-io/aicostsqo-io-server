@@ -20,8 +20,15 @@ const getBySiteId = async (siteId) => {
   throw new Error('Gpr profiles not found');
 };
 
+const bulkDelete = async (gprProfiles) => {
+  const gprProfile = await GprProfile.deleteMany({ _id: { $in: gprProfiles } });
+  /* if (gprProfile) return gprProfile;
+  throw new Error('GprProfile is not deleted'); */
+};
+
 module.exports = {
   insertGprProfiles: insertProfiles,
   getBySiteId,
   insert,
+  bulkDelete,
 };
