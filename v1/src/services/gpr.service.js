@@ -12,7 +12,15 @@ const getBySiteId = async (siteId) => {
   throw new Error('Gprs not found');
 };
 
+const bulkDelete = async (gprs) => {
+  const response = await Gpr.deleteMany({ _id: { $in: gprs } });
+  console.log('response: ', response);
+  /* if (gpr) return gpr;
+  throw new Error('Gpr not deleted'); */
+};
+
 module.exports = {
   insertGpr: insert,
   getBySiteId,
+  bulkDelete,
 };
