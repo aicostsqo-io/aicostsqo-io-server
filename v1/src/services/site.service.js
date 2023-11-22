@@ -42,10 +42,10 @@ const insertWithRelations = async (body) => {
     magnetometrics,
     seismics,
     televiewers,
-    resistivites,
+    resistivities,
   } = body;
 
-  const siteToInsert = await insertSite(site);
+  const siteToInsert = await insert(site);
   const siteBoundToInsert = await insertSiteBound({
     site: siteToInsert._id,
     ...siteBound,
@@ -112,7 +112,7 @@ const insertWithRelations = async (body) => {
     );
   }
 
-  for (const resistivity of resistivites) {
+  for (const resistivity of resistivities) {
     const { contours, ...rest } = resistivity;
     await insertResistivity({
       siteId: siteToInsert._id,
