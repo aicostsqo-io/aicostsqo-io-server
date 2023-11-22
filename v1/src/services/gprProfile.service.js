@@ -7,7 +7,9 @@ const insertProfiles = async (gprProfileData) => {
 };
 
 const getBySiteId = async (siteId) => {
-  const gprProfiles = await GprProfile.find({ siteId });
+  const gprProfiles = await GprProfile.find({ siteId }).sort({
+    rectangleLineNumber: 1,
+  });
   if (gprProfiles) return gprProfiles;
   throw new Error('Gpr profiles not found');
 };
