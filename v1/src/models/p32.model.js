@@ -6,7 +6,7 @@ const P32Schema = Mongoose.Schema({
     ref: "sites",
   },
   discontinuitySetId: { type: Number },
-  intensity: { type: Mongoose.Types.Decimal128 },
+  intensity: { type: Number },
 });
 
 const P32Model = Mongoose.model("P32", P32Schema);

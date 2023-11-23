@@ -6,7 +6,7 @@ const P20Schema = Mongoose.Schema({
     ref: "sites",
   },
   discontinuitySetId: { type: Number },
-  intensity: { type: Mongoose.Types.Decimal128 },
+  intensity: { type: Number },
 });
 
 const P20Model = Mongoose.model("P20", P20Schema);

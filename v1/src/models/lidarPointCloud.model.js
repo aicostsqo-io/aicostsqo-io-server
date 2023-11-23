@@ -10,15 +10,15 @@ const LidarPointCloudSchema = Mongoose.Schema(
     jointSetNumber: Number,
     discontiunityPlaneNumber: Number,
     positionX: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     positionY: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
     positionZ: {
-      type: Mongoose.Types.Decimal128,
+      type: Number,
       required: true,
     },
   },

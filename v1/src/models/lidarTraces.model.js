@@ -12,12 +12,12 @@ const LidarTraceSchema = Mongoose.Schema(
     dip: Number,
     dipDirection: Number,
     persistence: String,
-    traceInitialVertexX: Mongoose.Types.Decimal128,
-    traceInitialVertexY: Mongoose.Types.Decimal128,
-    traceInitialVertexZ: Mongoose.Types.Decimal128,
-    traceEndingVertexX: Mongoose.Types.Decimal128,
-    traceEndingVertexY: Mongoose.Types.Decimal128,
-    traceEndingVertexZ: Mongoose.Types.Decimal128,
+    traceInitialVertexX: Number,
+    traceInitialVertexY: Number,
+    traceInitialVertexZ: Number,
+    traceEndingVertexX: Number,
+    traceEndingVertexY: Number,
+    traceEndingVertexZ: Number,
   },
   { timestamps: true, versionKey: false }
 );
