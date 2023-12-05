@@ -13,10 +13,16 @@ config();
 loaders();
 
 const app = express();
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(cors());
+app.use(
+  cors({
+    origin: '*', // TODO: change this to the frontend url
+    allowedHeaders: '*',
+    methods: '*',
+    credentials: true,
+  })
+);
 app.use(express.json());
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(fileUpload());
 
 app.listen(process.env.APP_PORT, () => {
@@ -25,6 +31,7 @@ app.listen(process.env.APP_PORT, () => {
     res.send('Hello World');
   });
   app.use('/api', require('./routes'));
+  app.use('/api/uploads', express.static(path.join(__dirname, 'uploads')));
   app.use(notFound);
   app.use(errorHandler);
 });
