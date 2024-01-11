@@ -23,7 +23,10 @@ const GprProfileSchema = Mongoose.Schema(
     endVertexY: Number,
     endVertexZ: Number,
     frequency: Number,
-    filname: String,
+    filname: {
+      type: String,
+      default: `gprProfiles/default-gprProfile.jpeg`,
+    },
   },
   { timestamps: true, versionKey: false }
 );
