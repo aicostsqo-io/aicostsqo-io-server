@@ -3,14 +3,31 @@ const {
   listSites,
   getSite,
   insertWithRelations,
+  insertSite,
 } = require('../services/site.service');
-const { getSiteBoundBySiteId } = require('../services/siteBound.service');
+const {
+  getSiteBoundBySiteId,
+  insertSiteBound,
+} = require('../services/siteBound.service');
 
 const create = async (req, res) => {
   await insertWithRelations(req.body);
   res.send({
     success: true,
     message: 'Site created successfully',
+  });
+};
+
+const manual = async (req, res) => {
+  const siteToInsert = await insertSite(req.body.site);
+  await insertSiteBound({
+    site: siteToInsert._id,
+    ...req.body.siteBound,
+  });
+
+  res.send({
+    success: true,
+    message: 'Site and bounds created manually',
   });
 };
 
@@ -47,4 +64,5 @@ module.exports = {
   create,
   list,
   get,
+  manual,
 };
