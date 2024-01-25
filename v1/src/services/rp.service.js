@@ -9,10 +9,12 @@ const bulkDeleteRps = async (rps) => {
   const result = await Rp.deleteMany({ _id: { $in: rps } });
   console.log('silme sonucu: ', result);
 };
-const insert = async (rpData) => {
-  /* const rpCount = await Rp.countDocuments({ siteBound: rpData.siteBound });
-  rpData.name = "RP " + String(rpCount + 1).padStart(3, "0"); */
 
+const bulkInsertRps = async (rps) => {
+  await Rp.insertMany(rps);
+};
+
+const insert = async (rpData) => {
   const rp = await Rp.create(rpData);
   if (rp) return rp;
   throw new Error('Rp not created');
@@ -29,4 +31,5 @@ module.exports = {
   listRps: list,
   insertRp: insert,
   getRpsBySiteBoundId,
+  bulkInsertRps,
 };

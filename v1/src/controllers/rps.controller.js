@@ -3,6 +3,7 @@ const {
   bulkDeleteRps,
   insertRp,
   getRpsBySiteBoundId,
+  bulkInsertRps,
 } = require('../services/rp.service');
 
 const create = async (req, res) => {
@@ -19,6 +20,14 @@ const bulkDelete = async (req, res) => {
   res.send({
     success: true,
     message: 'Deleted successfully',
+  });
+};
+
+const bulkInsert = async (req, res) => {
+  await bulkInsertRps(req.body);
+  res.send({
+    success: true,
+    message: 'Created successfully',
   });
 };
 
@@ -46,4 +55,5 @@ module.exports = {
   index,
   create,
   getBySiteBoundId,
+  bulkInsert,
 };
