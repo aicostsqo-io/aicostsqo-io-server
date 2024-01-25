@@ -1,10 +1,10 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
 const RpSchema = Mongoose.Schema(
   {
     siteBound: {
       type: Mongoose.Types.ObjectId,
-      ref: "siteBounds",
+      ref: 'siteBounds',
     },
     name: {
       type: String,
@@ -62,4 +62,4 @@ const RpSchema = Mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model("rps", RpSchema);
+module.exports = Mongoose.model('rps', RpSchema);
