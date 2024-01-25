@@ -28,10 +28,15 @@ const bulkDeleteRpDiscs = async (rps) => {
   await RPDisc.deleteMany({ _id: { $in: rps } });
 };
 
+const bulkInsertDisc = async (discs) => {
+  await RPDisc.insertMany(discs);
+};
+
 module.exports = {
   insertDisc: insert,
   insertDiscs: insertDiscs,
   listDiscs: list,
   getDiscsByRpId,
   bulkDeleteRpDiscs,
+  bulkInsertDisc,
 };
