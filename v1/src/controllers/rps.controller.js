@@ -4,6 +4,7 @@ const {
   insertRp,
   getRpsBySiteBoundId,
   bulkInsertRps,
+  getLastRpBySiteBoundId,
 } = require('../services/rp.service');
 
 const create = async (req, res) => {
@@ -24,6 +25,10 @@ const bulkDelete = async (req, res) => {
 };
 
 const bulkInsert = async (req, res) => {
+  console.log('req.body', req.body);
+
+  // const rp = await getLastRpBySiteBoundId(req.body[0].siteBound);
+  // console.log('rp', rp);
   await bulkInsertRps(req.body);
   res.send({
     success: true,
