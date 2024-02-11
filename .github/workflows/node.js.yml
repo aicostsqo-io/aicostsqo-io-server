@@ -33,7 +33,7 @@ jobs:
         
     - name: PROD_ENV Create
       run: |
-        touch .env
+        touch v1/src/config/.env
         echo "${{ secrets.PROD_ENV_FILE }}" > .env
 
     - run: pm2 restart AicostsqoNodeAPI
