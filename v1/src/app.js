@@ -5,11 +5,14 @@ const config = require('./config');
 const cors = require('cors');
 const loaders = require('./loaders');
 const path = require('path');
+const dotenv = require('dotenv')
 
 const errorHandler = require('./middlewares/errorHandler');
 const notFound = require('./middlewares/notFound');
 
-config();
+dotenv.config({
+        path: "./config/.env" //dotenv config içerisine config dosyamızın path ini verdik
+    });
 loaders();
 
 const app = express();
