@@ -28,12 +28,12 @@ const getRpsBySiteBoundId = async (siteBoundId) => {
 };
 
 const getLastRpBySiteBoundId = async (siteBoundId) => {
-  console.log('siteBoundId', siteBoundId);
-  const rp = await Rp.find({
+  const rp = await Rp.findOne({
     siteBound: siteBoundId,
-  }).limit(1);
-  console.log('rp2222', rp);
-  if (rp) return rp[0];
+  })
+    .sort({ name: -1 })
+    .limit(1);
+  if (rp) return rp;
   throw new Error('Rps not found');
 };
 

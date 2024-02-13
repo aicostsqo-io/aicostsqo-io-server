@@ -25,11 +25,21 @@ const bulkDelete = async (req, res) => {
 };
 
 const bulkInsert = async (req, res) => {
-  console.log('req.body', req.body);
+  const newRPs = [];
+  if (req?.body[0]?.siteBound === undefined) {
+    res.send({
+      success: false,
+      message: 'Site Bound ID is required',
+    });
+  }
+  for (let rp of req.body) {
+    const { name } = await getLastRpBySiteBoundId(rp.siteBound);
+    const lastRPNumber = parseInt(name.split(' ')[1]);
+    rp.name = `RP ${lastRPNumber + 1}`;
+    newRPs.push(rp);
+  }
 
-  // const rp = await getLastRpBySiteBoundId(req.body[0].siteBound);
-  // console.log('rp', rp);
-  await bulkInsertRps(req.body);
+  await bulkInsertRps(newRPs);
   res.send({
     success: true,
     message: 'Created successfully',
