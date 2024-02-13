@@ -45,10 +45,18 @@ const insertWithRelations = async (body) => {
     resistivities,
   } = body;
 
-  const siteToInsert = await insert(site);
+  const { height, ...siteWithoutHeight } = site;
+
+  const siteToInsert = await insert({ ...siteWithoutHeight });
   const siteBoundToInsert = await insertSiteBound({
     site: siteToInsert._id,
     ...siteBound,
+  });
+
+  await insertRp({
+    siteBound: siteBoundToInsert._id,
+    positionZ: height,
+    name: 'RP 0',
   });
 
   for (const rp of rps) {
