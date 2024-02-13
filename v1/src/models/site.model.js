@@ -7,6 +7,10 @@ const SiteSchema = Mongoose.Schema(
       ref: 'users',
     },
     name: String,
+    generateVirtual1DExtendedRPs: Boolean,
+    calculateMaximumCuboids: Boolean,
+    calculatePolyhedrons: Boolean,
+    generateDiscontinuityPlanes: Boolean,
   },
   { timestamps: true, versionKey: false }
 );
