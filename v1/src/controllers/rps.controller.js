@@ -5,7 +5,11 @@ const {
   getRpsBySiteBoundId,
   bulkInsertRps,
   getLastRpBySiteBoundId,
+  getOutputVolumesByRp,
 } = require('../services/rp.service');
+const {
+  calculateDistributionCurves,
+} = require('../services/distributionCurves.service');
 
 const create = async (req, res) => {
   const rp = await insertRp(req.body);
@@ -65,10 +69,31 @@ const getBySiteBoundId = async (req, res) => {
   });
 };
 
+const distributionCurves = async (req, res) => {
+  const { rpIdList, sourceList, chartList } = req.body;
+  const result = [];
+  for (let index = 0; index < rpIdList.length; index++) {
+    const rpId = rpIdList[index];
+    const rpOutputVolumes = await getOutputVolumesByRp(rpId);
+    const rpRes = await calculateDistributionCurves(
+      rpOutputVolumes,
+      sourceList,
+      chartList
+    );
+    result.push({ ...rpRes, rpId });
+  }
+  res.send({
+    result,
+    success: true,
+    message: 'Success!',
+  });
+};
+
 module.exports = {
   bulkDelete,
   index,
   create,
   getBySiteBoundId,
   bulkInsert,
+  distributionCurves,
 };

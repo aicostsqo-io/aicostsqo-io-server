@@ -1,5 +1,6 @@
-const { default: mongoose } = require('mongoose');
 const Rp = require('../models/rp.model');
+const { createOutputVolumes } = require('./distributionCurves.service');
+const { getByRp } = require('./outputVolume.service');
 
 const list = async () => {
   const rps = await Rp.find({});
@@ -37,6 +38,14 @@ const getLastRpBySiteBoundId = async (siteBoundId) => {
   throw new Error('Rps not found');
 };
 
+const getOutputVolumesByRp = async (rpId) => {
+  const outputVolumes = await getByRp(rpId);
+  if (outputVolumes.length < 1) {
+    return await createOutputVolumes(rpId);
+  }
+  return outputVolumes;
+};
+
 module.exports = {
   bulkDeleteRps,
   listRps: list,
@@ -44,4 +53,5 @@ module.exports = {
   getRpsBySiteBoundId,
   bulkInsertRps,
   getLastRpBySiteBoundId,
+  getOutputVolumesByRp,
 };
