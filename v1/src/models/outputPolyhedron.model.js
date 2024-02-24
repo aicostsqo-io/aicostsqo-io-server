@@ -1,21 +1,24 @@
-const Mongoose = require("mongoose");
+const Mongoose = require('mongoose');
 
-const OutputPolyhedronSchema = Mongoose.Schema({
-  rpId: {
-    type: Mongoose.Types.ObjectId,
-    ref: "rps",
+const OutputPolyhedronSchema = Mongoose.Schema(
+  {
+    rpId: {
+      type: Mongoose.Types.ObjectId,
+      ref: 'rps',
+    },
+    polyhedronId: { type: Number },
+    volumeTheoric: { type: Number },
+    vertexCount: { type: Number },
+    faceCount: { type: Number },
+    objFileName: { type: String },
+    plyFileName: { type: String },
+    volumeQuarry: { type: Number },
   },
-  polyhedronId: { type: Number },
-  volume: { type: Number },
-  vertexCount: { type: Number },
-  faceCount: { type: Number },
-  faceTypeCount: { type: Number },
-  faceTypes: { type: String },
-  faces: { type: [String] },
-});
+  { timestamps: true, versionKey: false }
+);
 
 const OutputPolyhedronModel = Mongoose.model(
-  "OutputPolyhedron",
+  'outputPolyhedrons',
   OutputPolyhedronSchema
 );
 
