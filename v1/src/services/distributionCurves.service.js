@@ -31,7 +31,7 @@ const preprocessData = async (rpId) => {
     const maxQs = await _context.outputMaxQs.find({
       rpId: rpId,
       polyhedronId: polyhedron.polyhedronId,
-      volumeOfMaxQ: { $gte: 1 }, // TODO: check if this is correct
+      // volumeOfMaxQ: { $gte: 1 }, // TODO: check if this is correct
     });
     const outputVolume = {
       rpId,
