@@ -12,7 +12,12 @@ const {
 } = require('../services/distributionCurves.service');
 
 const create = async (req, res) => {
-  const rp = await insertRp(req.body);
+  const { name } = await getLastRpBySiteBoundId(req.body.siteBound);
+  const lastRPNumber = parseInt(name.split(' ')[1]);
+  const rp = await insertRp({
+    ...req.body,
+    name: `RP ${lastRPNumber + 1}`,
+  });
   res.send({
     rp,
     success: true,
@@ -36,10 +41,11 @@ const bulkInsert = async (req, res) => {
       message: 'Site Bound ID is required',
     });
   }
+  let index = 1;
   for (let rp of req.body) {
     const { name } = await getLastRpBySiteBoundId(rp.siteBound);
     const lastRPNumber = parseInt(name.split(' ')[1]);
-    rp.name = `RP ${lastRPNumber + 1}`;
+    rp.name = `RP ${lastRPNumber + index++}`;
     newRPs.push(rp);
   }
 
