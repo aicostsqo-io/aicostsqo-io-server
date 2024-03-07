@@ -1,3 +1,13 @@
+const {
+  normal,
+  logNormal,
+  exponential,
+  rayleigh,
+} = require('../scripts/utils/distributionFormulas');
+const {
+  chiSquareTest,
+  minMaxNormalization,
+} = require('../scripts/utils/goodnesOfFitTests');
 const { bulkInsert } = require('./outputVolume.service');
 
 const _context = {
@@ -5,6 +15,8 @@ const _context = {
   outputMaxQs: require('../models/outputMaxQ.model'),
   outputVolumes: require('../models/outputVolume.model'),
 };
+
+const { std, mean } = require('mathjs');
 
 const Sources = {
   VolumeTheoric: 'volumeTheoric',
@@ -71,6 +83,23 @@ const calculateDistributionCurves = async (
         rpOutputVolumes.map((p) => p[source]),
         chart
       );
+      if (chart === Charts.Pdf) {
+        const normalizedObserved = Sources[source][chart].map((p) => ({
+          x: p.x,
+          y: minMaxNormalization(p.y, Sources[source][chart]),
+        }));
+        Sources[source][chart] = {};
+        const normal = normalDistribution(normalizedObserved);
+        const logNormal = logNormalDistribution(normalizedObserved);
+        const exponential = exponentialDistribution(normalizedObserved);
+        const rayleigh = rayleighDistribution(normalizedObserved);
+        const sortRes = [normal, logNormal, exponential, rayleigh].sort(
+          (a, b) => a.chiSquareTestResult.sum - b.chiSquareTestResult.sum
+        );
+        Sources[source][chart].observed = normalizedObserved;
+        Sources[source][chart].expected =
+          sortRes[0].chiSquareTestResult.expected;
+      }
     }
     result[source] = Sources[source];
   }
@@ -90,6 +119,48 @@ const calculateByChart = (source, chart) => {
     case Charts.Pdf:
       return calculatePdf(source);
   }
+};
+
+const normalDistribution = (source) => {
+  const stdDev = std(source.map((p) => p.x));
+  const meanValue = mean(source.map((p) => p.x));
+  const result = source.map((data) => ({
+    x: data.x,
+    y: normal(data.x, meanValue, stdDev),
+  }));
+  const chiSquareTestResult = chiSquareTest(source, result, source.length - 1);
+  return { result, chiSquareTestResult };
+};
+
+const logNormalDistribution = (source) => {
+  const stdDev = std(source.map((p) => p.x));
+  const meanValue = mean(source.map((p) => p.x));
+  const result = source.map((data) => ({
+    x: data.x,
+    y: logNormal(data.x, meanValue, stdDev),
+  }));
+  const chiSquareTestResult = chiSquareTest(source, result, source.length - 1);
+  return { result, chiSquareTestResult };
+};
+
+const exponentialDistribution = (source) => {
+  const meanValue = mean(source.map((p) => p.x));
+  const result = source.map((data) => ({
+    x: data.x,
+    y: exponential(data.x, meanValue),
+  }));
+  const chiSquareTestResult = chiSquareTest(source, result, source.length - 1);
+  return { result, chiSquareTestResult };
+};
+
+const rayleighDistribution = (source) => {
+  const stdDev = std(source.map((p) => p.x));
+  const result = source.map((data) => ({
+    x: data.x,
+    y: rayleigh(data.x, stdDev),
+  }));
+  const chiSquareTestResult = chiSquareTest(source, result, source.length - 1);
+  return { result, chiSquareTestResult };
 };
 
 const calculateHistogram = (source) => {
