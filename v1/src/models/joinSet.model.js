@@ -1,6 +1,6 @@
 const Mongoose = require('mongoose');
 
-const DfnSchema = Mongoose.Schema(
+const JoinSetSchema = Mongoose.Schema(
   {
     siteId: {
       type: Mongoose.Types.ObjectId,
@@ -13,20 +13,13 @@ const DfnSchema = Mongoose.Schema(
     dip: Number,
     dipDirection: Number,
     expectationTraceLength: Number,
-    spacing: Number,
-    fisherK: Number,
-    mu: Number,
-    mean: Number,
-    std: Number,
     frictionAngle: Number,
     location: String,
-    persistence: String,
-    orientation: String,
-    fractureIntensity: String,
-    intensityValue: Number,
     positionX: Number,
     positionY: Number,
     positionZ: Number,
+    trend: Number,
+    plunge: Number,
     vertex2: {
       x: Number,
       y: Number,
@@ -46,4 +39,4 @@ const DfnSchema = Mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-module.exports = Mongoose.model('dfns', DfnSchema);
+module.exports = Mongoose.model('joinSets', JoinSetSchema);
