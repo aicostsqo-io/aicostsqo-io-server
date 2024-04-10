@@ -2,9 +2,13 @@ const fs = require('fs').promises;
 const uuid = require('uuid');
 const path = require('path');
 
-const uploadFile = (img, folderToSave) => {
+const uploadFile = (file, folderToSave, extensionRules = null) => {
   return new Promise(async (resolve, reject) => {
-    const fileExtension = path.extname(img.name);
+    const fileExtension = path.extname(file.name);
+    if (extensionRules && !extensionRules.includes(fileExtension)) {
+      reject(new Error('Invalid file extension'));
+      return;
+    }
     const fileName = `${uuid.v4().replace(/-/g, '')}${fileExtension}`;
     const folderPath = path.join(
       __dirname,
@@ -25,7 +29,7 @@ const uploadFile = (img, folderToSave) => {
 
     const filePath = path.join(folderPath, fileName);
 
-    img.mv(filePath, (err) => {
+    file.mv(filePath, (err) => {
       if (err) {
         reject(err);
       } else {
