@@ -1,5 +1,7 @@
-const server = require("./server");
+const folders = require('./folders');
+const server = require('./server');
 
 module.exports = () => {
   server();
+  folders();
 };
