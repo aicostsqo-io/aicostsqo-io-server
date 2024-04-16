@@ -26,9 +26,16 @@ const isValidObjectId = (id) => {
   return false;
 };
 
+const getUserIdFromRequest = (req) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const user = JWT.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY);
+  return user._id;
+};
+
 module.exports = {
   passwordToHash,
   generateAccessToken,
   generateRefreshToken,
   isValidObjectId,
+  getUserIdFromRequest,
 };

@@ -18,9 +18,9 @@ const fileNameGenerator = (fileExtension) =>
 const pathCombiner = (...fileNames) => path.join(...fileNames);
 
 const createFolders = async () => {
-  const folders = Object.values(FOLDERS);
+  const folders = Object.keys(FOLDERS);
   for (let index = 0; index < folders.length; index++) {
-    const folderToCreate = getFolderAbsolutePath(folders[index]);
+    const folderToCreate = folderPaths[folders[index]].absolutePath;
 
     try {
       if (!fs.existsSync(folderToCreate)) {
@@ -73,6 +73,5 @@ module.exports = {
   pathCombiner,
   createFolders,
   folderPaths,
-  getFolderPath: getFolderAbsolutePath,
   FOLDER_NAMES: FOLDERS,
 };
