@@ -18,20 +18,16 @@ const RP_COLUMNS = {
 
 const RP_DISC_COLUMNS = {
   _id: 'ID',
-  siteBound: 'Site Bound',
-  name: 'Name',
-  slopeAngle: 'Slope Angle',
-  crepeAngle: 'Crepe Angle',
-  volume: 'Volume',
-  sizeX: 'Size X',
-  sizeY: 'Size Y',
-  sizeZ: 'Size Z',
-  positionX: 'Position X',
-  positionY: 'Position Y',
-  positionZ: 'Position Z',
-  rotationX: 'Rotation X',
-  rotationY: 'Rotation Y',
-  rotationZ: 'Rotation Z',
+  rpId: 'Rp ID',
+  dip: 'Dip',
+  dipDirect: 'Dip Direct',
+  pX: 'P X',
+  pY: 'P Y',
+  pZ: 'P Z',
+  nX: 'N X',
+  nY: 'N Y',
+  nZ: 'N Z',
+  type: 'Type',
 };
 
 const SITE_COLUMNS = {

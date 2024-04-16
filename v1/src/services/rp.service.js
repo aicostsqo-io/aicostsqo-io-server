@@ -3,7 +3,8 @@ const { createOutputVolumes } = require('./distributionCurves.service');
 const { getByRp } = require('./outputVolume.service');
 const { writeWorkbookToFile } = require('../scripts/utils/excel.helper');
 const { addWorksheetToWorkbook, createWorkBook } = require('./excel.service');
-const { RP_COLUMNS } = require('./constants/modelColumns');
+const { RP_COLUMNS, RP_DISC_COLUMNS } = require('./constants/modelColumns');
+const { getDiscsByRpId } = require('./rpDisc.service');
 
 const list = async () => {
   const rps = await Rp.find({});
@@ -57,9 +58,20 @@ const exportBySiteBoundToExcel = async (siteBoundId) => {
       siteBound: p.siteBound.toString(),
     };
   });
+  const rpDiscs = await rps.reduce(async (accPromise, curr) => {
+    const acc = await accPromise;
+    const discs = await getDiscsByRpId(curr._id);
+    acc.push(...discs);
+    return acc;
+  }, []);
+
+  if (rps.length < 1 && rpDiscs.length < 1) {
+    throw new Error('No rps and rp discs found');
+  }
 
   const workbook = createWorkBook();
   addWorksheetToWorkbook(workbook, 'RPs', RP_COLUMNS, rps);
+  addWorksheetToWorkbook(workbook, 'Discs', RP_DISC_COLUMNS, rpDiscs);
   return writeWorkbookToFile(workbook);
 };
 
