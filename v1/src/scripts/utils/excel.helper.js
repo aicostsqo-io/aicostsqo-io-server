@@ -14,7 +14,11 @@ const writeWorkbookToFile = async (workbook) => {
 const createWorksheetHeaders = (worksheet, columns) => {
   const sheetColumns = [];
   Object.entries(columns).forEach(([key, value]) => {
-    sheetColumns.push({ header: value, key });
+    sheetColumns.push({
+      header: value,
+      key,
+      width: value.length < 12 ? 12 : value.length,
+    });
   });
   worksheet.columns = sheetColumns;
   worksheet.getRow(1).font = { bold: true };
