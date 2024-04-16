@@ -1,6 +1,9 @@
 const Rp = require('../models/rp.model');
 const { createOutputVolumes } = require('./distributionCurves.service');
 const { getByRp } = require('./outputVolume.service');
+const { writeWorkbookToFile } = require('../scripts/utils/excel.helper');
+const { addWorksheetToWorkbook, createWorkBook } = require('./excel.service');
+const { RP_COLUMNS } = require('./constants/modelColumns');
 
 const list = async () => {
   const rps = await Rp.find({});
@@ -46,6 +49,20 @@ const getOutputVolumesByRp = async (rpId) => {
   return outputVolumes;
 };
 
+const exportBySiteBoundToExcel = async (siteBoundId) => {
+  const rps = (await getRpsBySiteBoundId(siteBoundId)).map((p) => {
+    return {
+      ...p._doc,
+      _id: p._id.toString(),
+      siteBound: p.siteBound.toString(),
+    };
+  });
+
+  const workbook = createWorkBook();
+  addWorksheetToWorkbook(workbook, 'RPs', RP_COLUMNS, rps);
+  return writeWorkbookToFile(workbook);
+};
+
 module.exports = {
   bulkDeleteRps,
   listRps: list,
@@ -54,4 +71,5 @@ module.exports = {
   bulkInsertRps,
   getLastRpBySiteBoundId,
   getOutputVolumesByRp,
+  exportBySiteBoundToExcel,
 };

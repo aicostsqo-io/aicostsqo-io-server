@@ -4,6 +4,9 @@ const { createWorksheetHeaders } = require('../scripts/utils/excel.helper');
 const createWorkBook = () => {
   const workbook = new Workbook();
   workbook.creator = 'AI-COSTSQO';
+  workbook.title = 'AI-COSTSQO';
+  workbook.subject = 'AI-COSTSQO';
+  workbook.description = 'AI-COSTSQO';
   workbook.lastModifiedBy = 'AI-COSTSQO';
   workbook.created = new Date(2021, 8, 30);
   workbook.modified = new Date(2021, 8, 30);

@@ -6,6 +6,7 @@ const {
   bulkInsertRps,
   getLastRpBySiteBoundId,
   getOutputVolumesByRp,
+  exportBySiteBoundToExcel: exportBySiteBound,
 } = require('../services/rp.service');
 const {
   calculateDistributionCurves,
@@ -95,6 +96,16 @@ const distributionCurves = async (req, res) => {
   });
 };
 
+const exportBySiteBoundToExcel = async (req, res) => {
+  const { sitedBoundId } = req.params;
+  const result = await exportBySiteBound(sitedBoundId);
+  res.send({
+    result,
+    success: true,
+    message: 'Success!',
+  });
+};
+
 module.exports = {
   bulkDelete,
   index,
@@ -102,4 +113,5 @@ module.exports = {
   getBySiteBoundId,
   bulkInsert,
   distributionCurves,
+  exportBySiteBoundToExcel,
 };

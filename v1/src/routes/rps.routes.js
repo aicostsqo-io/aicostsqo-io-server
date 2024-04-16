@@ -6,6 +6,7 @@ const {
   bulkInsert,
   getBySiteBoundId,
   distributionCurves,
+  exportBySiteBoundToExcel,
 } = require('../controllers/rps.controller');
 const errorCatcher = require('../scripts/utils/errorCatcher');
 const rpValidation = require('../validations/rp.validation');
@@ -18,6 +19,9 @@ router.route('/:siteBoundId').get(errorCatcher(getBySiteBoundId));
 router.route('/').post(errorCatcher(create));
 router.route('/bulk-delete').post(errorCatcher(bulkDelete));
 router.route('/manual').post(errorCatcher(bulkInsert));
+router
+  .route('/export/by-site-bound/:sitedBoundId')
+  .get(errorCatcher(exportBySiteBoundToExcel));
 router
   .route('/distribution-curves')
   .post(
