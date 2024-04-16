@@ -305,6 +305,61 @@ const SEISMIC_DISC_COLUMNS = {
   nZ: 'N Z',
 };
 
+const OUTPUT_VOLUME_COLUMNS = {
+  rpId: 'Rp ID',
+  polyhedronId: 'Polyhedron ID',
+  volumeTheoric: 'Volume Theoric',
+  volumeQuarry: 'Volume Quarry',
+  totalVolumeOfMaxQs: 'Total Volume Of Max Qs',
+};
+
+const OUTPUT_MAXQ_COLUMNS = {
+  rpId: 'Rp ID',
+  polyhedronId: 'Polyhedron ID',
+  maxQId: 'Max Q ID',
+  volumeOfMaxQ: 'Volume Of Max Q',
+  maxQFirstVertexId: 'Max Q First Vertex ID',
+  maxQLastVertexId: 'Max Q Last Vertex ID',
+  rotationAngleX: 'Rotation Angle X',
+  rotationAngleY: 'Rotation Angle Y',
+  rotationAngleZ: 'Rotation Angle Z',
+};
+
+const OUTPUT_MAXQ_VERTEX_COLUMNS = {
+  rpId: 'Rp ID',
+  polyhedronId: 'Polyhedron ID',
+  vertexId: 'Vertex ID',
+  x: 'X',
+  y: 'Y',
+  z: 'Z',
+};
+
+const OUTPUT_POLYHEDRON_COLUMNS = {
+  rpId: 'Rp ID',
+  polyhedronId: 'Polyhedron ID',
+  volumeTheoric: 'Volume Theoric',
+  vertexCount: 'Vertex Count',
+  faceCount: 'Face Count',
+  objFileName: 'Obj File Name',
+  plyFileName: 'Ply File Name',
+  volumeQuarry: 'Volume Quarry',
+};
+
+const OUTPUT_VERTEX_COLUMNS = {
+  rpId: 'Rp ID',
+  vertexId: 'Vertex ID',
+  x: 'X',
+  y: 'Y',
+  z: 'Z',
+};
+
+const OUTPUT_FACE_COLUMNS = {
+  rpId: 'Rp ID',
+  polyhedronId: 'Polyhedron ID',
+  faceId: 'Face ID',
+  vertexes: 'Vertexes',
+};
+
 module.exports = {
   RP_COLUMNS,
   RP_DISC_COLUMNS,
@@ -322,4 +377,10 @@ module.exports = {
   SEISMIC_COLUMNS,
   SEISMIC_PROFILE_COLUMNS,
   SEISMIC_DISC_COLUMNS,
+  OUTPUT_VOLUME_COLUMNS,
+  OUTPUT_MAXQ_COLUMNS,
+  OUTPUT_MAXQ_VERTEX_COLUMNS,
+  OUTPUT_POLYHEDRON_COLUMNS,
+  OUTPUT_VERTEX_COLUMNS,
+  OUTPUT_FACE_COLUMNS,
 };

@@ -26,5 +26,7 @@ router.use('/uploads', require('./uploads.routes'));
 router.use('/scanlines', require('./scanlines.routes'));
 router.use('/joint-sets', require('./jointSets.routes'));
 router.use('/lidars', require('./lidars.routes'));
+router.use('/max-quboits', require('./maxQuboits.routes'));
+router.use('/polyhedrons', require('./polyhedrons.routes'));
 
 module.exports = router;

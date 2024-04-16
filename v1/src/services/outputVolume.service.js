@@ -16,7 +16,14 @@ const getByRp = async (rpId) => {
   return res;
 };
 
+const getByRpId = async (rpId) => {
+  const outputVolumes = await OutputVolumes.find({ rpId });
+  if (outputVolumes) return outputVolumes;
+  throw new Error('Data not found');
+};
+
 module.exports = {
   getByRp,
+  getByRpId,
   bulkInsert,
 };
