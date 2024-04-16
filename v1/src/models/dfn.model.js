@@ -2,9 +2,9 @@ const Mongoose = require('mongoose');
 
 const DfnSchema = Mongoose.Schema(
   {
-    siteId: {
+    rpId: {
       type: Mongoose.Types.ObjectId,
-      ref: 'sites',
+      ref: 'rps',
       required: true,
     },
     discontinuitySetId: Number,
@@ -42,6 +42,8 @@ const DfnSchema = Mongoose.Schema(
       y: Number,
       z: Number,
     },
+    objFileName: String,
+    mtlFileName: String,
   },
   { timestamps: true, versionKey: false }
 );

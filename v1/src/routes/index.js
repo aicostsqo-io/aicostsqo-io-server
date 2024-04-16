@@ -28,5 +28,6 @@ router.use('/joint-sets', require('./jointSets.routes'));
 router.use('/lidars', require('./lidars.routes'));
 router.use('/max-quboits', require('./maxQuboits.routes'));
 router.use('/polyhedrons', require('./polyhedrons.routes'));
+router.use('/dfns', require('./dfns.routes'));
 
 module.exports = router;
