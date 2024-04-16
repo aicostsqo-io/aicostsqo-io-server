@@ -14,6 +14,9 @@ const { insertSeismicDiscs } = require('./seismicDisc.service');
 const { insertSeismicProfiles } = require('./seismicProfile.service');
 const { insertTeleviewer } = require('./televiewer.service');
 const { insertTeleviewerDiscs } = require('./televiewerDisc.service');
+const { SITE_COLUMNS } = require('./constants/modelColumns');
+const { createWorkBook, addWorksheetToWorkbook } = require('./excel.service');
+const { writeWorkbookToFile } = require('../scripts/utils/excel.helper');
 
 const insert = async (data) => {
   const site = await Site.create(data);
@@ -31,6 +34,12 @@ const get = async (id) => {
   const site = await Site.findById(id);
   if (site) return site;
   throw new Error('Site not found');
+};
+
+const getByCustomerId = async (userId) => {
+  const sites = await Site.find({ customerId: userId }).sort({ name: 1 });
+  if (sites) return sites;
+  throw new Error('sites not found');
 };
 
 const insertWithRelations = async (body) => {
@@ -140,9 +149,28 @@ const insertWithRelations = async (body) => {
   }
 };
 
+const exportMySitesToExcel = async (userId) => {
+  const sites = (await getByCustomerId(userId)).map((p) => {
+    return {
+      ...p._doc,
+      _id: p._id.toString(),
+    };
+  });
+
+  if (sites.length < 1) {
+    throw new Error('No sites found');
+  }
+
+  const workbook = createWorkBook();
+  addWorksheetToWorkbook(workbook, 'Sites', SITE_COLUMNS, sites);
+  return writeWorkbookToFile(workbook);
+};
+
 module.exports = {
   insertSite: insert,
   listSites: list,
   getSite: get,
   insertWithRelations,
+  exportMySitesToExcel,
+  getByCustomerId,
 };

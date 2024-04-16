@@ -1,9 +1,11 @@
+const { getUserIdFromRequest } = require('../scripts/utils/helper');
 const { getRpsBySiteBoundId } = require('../services/rp.service');
 const {
   listSites,
   getSite,
   insertWithRelations,
   insertSite,
+  exportMySitesToExcel: exportMySites,
 } = require('../services/site.service');
 const {
   getSiteBoundBySiteId,
@@ -60,9 +62,20 @@ const get = async (req, res) => {
   });
 };
 
+const exportMySitesToExcel = async (req, res) => {
+  const userId = getUserIdFromRequest(req);
+  const result = await exportMySites(userId);
+  res.send({
+    result,
+    success: true,
+    message: 'Success!',
+  });
+};
+
 module.exports = {
   create,
   list,
   get,
   manual,
+  exportMySitesToExcel,
 };
