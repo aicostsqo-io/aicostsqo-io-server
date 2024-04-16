@@ -1,5 +1,6 @@
 const {
   getBySiteId: getResistivitys,
+  exportBySiteToExcel,
 } = require('../services/resistivity.service');
 const {
   getBySiteId: getContours,
@@ -20,6 +21,17 @@ const getBySiteId = async (req, res) => {
   });
 };
 
+const exportBySiteId = async (req, res) => {
+  const { siteId } = req.params;
+  const result = await exportBySiteToExcel(siteId);
+  res.send({
+    result,
+    success: true,
+    message: 'Exported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
+  exportBySiteId,
 };
