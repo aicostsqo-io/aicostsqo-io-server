@@ -1,5 +1,6 @@
 const {
   getBySiteId: getTeleviewers,
+  exportBySiteToExcel,
 } = require('../services/televiewer.service');
 const { getBySiteId: getDiscs } = require('../services/televiewerDisc.service');
 
@@ -18,6 +19,17 @@ const getBySiteId = async (req, res) => {
   });
 };
 
+const exportBySiteId = async (req, res) => {
+  const { siteId } = req.params;
+  const result = await exportBySiteToExcel(siteId);
+  res.send({
+    result,
+    success: true,
+    message: 'Exported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
+  exportBySiteId,
 };

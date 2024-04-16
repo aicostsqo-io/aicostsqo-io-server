@@ -2,6 +2,7 @@ const {
   getBySiteId: getGprs,
   insertGpr,
   bulkDelete: removeGprs,
+  exportBySiteToExcel,
 } = require('../services/gpr.service');
 const { getBySiteId: getDiscs } = require('../services/gprDisc.service');
 const {
@@ -64,10 +65,21 @@ const getBySiteId = async (req, res) => {
   });
 };
 
+const exportBySiteId = async (req, res) => {
+  const { siteId } = req.params;
+  const result = await exportBySiteToExcel(siteId);
+  res.send({
+    result,
+    success: true,
+    message: 'Exported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
   create,
   createGprProfile,
   deleteGprs,
   deleteGprProfiles,
+  exportBySiteId,
 };

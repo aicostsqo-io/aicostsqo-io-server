@@ -1,4 +1,7 @@
-const { getBySiteId: getSeismics } = require('../services/seismic.service');
+const {
+  getBySiteId: getSeismics,
+  exportBySiteToExcel,
+} = require('../services/seismic.service');
 const { getBySiteId: getDiscs } = require('../services/seismicDisc.service');
 const {
   getBySiteId: getProfiles,
@@ -21,6 +24,17 @@ const getBySiteId = async (req, res) => {
   });
 };
 
+const exportBySiteId = async (req, res) => {
+  const { siteId } = req.params;
+  const result = await exportBySiteToExcel(siteId);
+  res.send({
+    result,
+    success: true,
+    message: 'Exported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
+  exportBySiteId,
 };

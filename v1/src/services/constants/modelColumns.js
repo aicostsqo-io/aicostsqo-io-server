@@ -217,6 +217,98 @@ const LIDAR_TRACES_COLUMNS = {
   traceEndingVertexZ: 'Trace Ending Vertex Z',
 };
 
+const TELEVIEWER_COLUMNS = {
+  siteId: 'Site ID',
+  type: 'Type',
+  sizeX: 'Size X',
+  sizeY: 'Size Y',
+  sizeZ: 'Size Z',
+  positionX: 'Position X',
+  positionY: 'Position Y',
+  positionZ: 'Position Z',
+  rotationX: 'Rotation X',
+  rotationY: 'Rotation Y',
+  rotationZ: 'Rotation Z',
+  holeNumber: 'Hole Number',
+  xHole: 'X Hole',
+  yHole: 'Y Hole',
+  zHole: 'Z Hole',
+  holeVerticalAngle: 'Hole Vertical Angle',
+  direction: 'Direction',
+  lengthOfHole: 'Length Of Hole',
+  diameterCore: 'Diameter Core',
+  explanation: 'Explanation',
+  imageDimensionA: 'Image Dimension A',
+  imageDimensionB: 'Image Dimension B',
+  perimeterX: 'Perimeter X',
+  zSliceZ: 'Z Slice Z',
+  radiusPixels: 'Radius Pixels',
+};
+
+const TELEVIEWER_DISC_COLUMNS = {
+  siteId: 'Site ID',
+  dip: 'Dip',
+  dipDirection: 'Dip Direction',
+  pX: 'P X',
+  pY: 'P Y',
+  pZ: 'P Z',
+  nX: 'N X',
+  nY: 'N Y',
+  nZ: 'N Z',
+  holeNumber: 'Hole Number',
+  typeOfHole: 'Type Of Hole',
+  imageOrMeshOfFractureInterpolation: 'Image Or Mesh Of Fracture Interpolation',
+  explanation: 'Explanation',
+  zAdjust: 'Z Adjust',
+};
+
+const SEISMIC_COLUMNS = {
+  siteId: 'Site ID',
+  measurementId: 'Measurement ID',
+  shape: 'Shape',
+  profilNumber: 'Profil Number',
+  geophones: 'Geophones',
+  spacing: 'Spacing',
+  shots: 'Shots',
+  length: 'Length',
+  locationAngle: 'Location Angle',
+  profileLocationX: 'Profile Location X',
+  profileLocationY: 'Profile Location Y',
+  profileLocationZ: 'Profile Location Z',
+  endOfTheSeismicProfile: 'End Of The Seismic Profile',
+};
+
+const SEISMIC_PROFILE_COLUMNS = {
+  siteId: 'Site ID',
+  seismicMeasurementId: 'Seismic Measurement ID',
+  shape: 'Shape',
+  profilNumber: 'Profil Number',
+  endsOfSeismicProfile: 'Ends Of Seismic Profile',
+  seismicProfileDirectory: 'Seismic Profile Directory',
+  explanation: 'Explanation',
+};
+
+const SEISMIC_DISC_COLUMNS = {
+  siteId: 'Site ID',
+  rectangleLineNumber: 'Rectangle Line Number',
+  profileType: 'Profile Type',
+  crackProfileNumber: 'Crack Profile Number',
+  typeOfCrack: 'Type Of Crack',
+  typeOfDisc: 'Type Of Disc',
+  dip: 'Dip',
+  dipDirection: 'Dip Direction',
+  mapReferenceSystem: 'Map Reference System',
+  startingVertexX: 'Starting Vertex X',
+  startingVertexY: 'Starting Vertex Y',
+  startingVertexZ: 'Starting Vertex Z',
+  endVertexX: 'End Vertex X',
+  endVertexY: 'End Vertex Y',
+  endVertexZ: 'End Vertex Z',
+  nX: 'N X',
+  nY: 'N Y',
+  nZ: 'N Z',
+};
+
 module.exports = {
   RP_COLUMNS,
   RP_DISC_COLUMNS,
@@ -229,4 +321,9 @@ module.exports = {
   LIDAR_JOINT_SET_COLUMNS,
   LIDAR_POINT_CLOUD_COLUMNS,
   LIDAR_TRACES_COLUMNS,
+  TELEVIEWER_COLUMNS,
+  TELEVIEWER_DISC_COLUMNS,
+  SEISMIC_COLUMNS,
+  SEISMIC_PROFILE_COLUMNS,
+  SEISMIC_DISC_COLUMNS,
 };

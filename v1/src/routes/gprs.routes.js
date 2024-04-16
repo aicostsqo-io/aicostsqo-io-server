@@ -5,6 +5,7 @@ const {
   createGprProfile,
   deleteGprs,
   deleteGprProfiles,
+  exportBySiteId,
 } = require('../controllers/gprs.controller');
 const errorCatcher = require('../scripts/utils/errorCatcher');
 
@@ -15,5 +16,6 @@ router.route('/profiles').post(errorCatcher(createGprProfile));
 router.route('/bulk-delete').post(errorCatcher(deleteGprs));
 router.route('/profiles/bulk-delete').post(errorCatcher(deleteGprProfiles));
 router.route('/by-site/:siteId').get(errorCatcher(getBySiteId));
+router.route('/export/by-site/:siteId').get(errorCatcher(exportBySiteId));
 
 module.exports = router;
