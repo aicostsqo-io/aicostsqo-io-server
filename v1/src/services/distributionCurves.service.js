@@ -146,6 +146,7 @@ const logNormalDistribution = (source) => {
 };
 
 const exponentialDistribution = (source) => {
+  if (source.length < 1) return { result: [], chiSquareTestResult: { sum: 0 } };
   const meanValue = mean(source.map((p) => p.x));
   const result = source.map((data) => ({
     x: data.x,
