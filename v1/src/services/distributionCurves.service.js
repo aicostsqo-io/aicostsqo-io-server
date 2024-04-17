@@ -122,6 +122,7 @@ const calculateByChart = (source, chart) => {
 };
 
 const normalDistribution = (source) => {
+  if (source.length < 1) return { result: [], chiSquareTestResult: { sum: 0 } };
   const stdDev = std(source.map((p) => p.x));
   const meanValue = mean(source.map((p) => p.x));
   const result = source.map((data) => ({
@@ -133,6 +134,7 @@ const normalDistribution = (source) => {
 };
 
 const logNormalDistribution = (source) => {
+  if (source.length < 1) return { result: [], chiSquareTestResult: { sum: 0 } };
   const stdDev = std(source.map((p) => p.x));
   const meanValue = mean(source.map((p) => p.x));
   const result = source.map((data) => ({
@@ -154,6 +156,7 @@ const exponentialDistribution = (source) => {
 };
 
 const rayleighDistribution = (source) => {
+  if (source.length < 1) return { result: [], chiSquareTestResult: { sum: 0 } };
   const stdDev = std(source.map((p) => p.x));
   const result = source.map((data) => ({
     x: data.x,
