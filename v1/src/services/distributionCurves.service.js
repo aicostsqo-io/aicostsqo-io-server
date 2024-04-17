@@ -55,7 +55,7 @@ const preprocessData = async (rpId) => {
         0
       ),
     };
-    if (outputVolume.totalVolumeOfMaxQs < 1) return null;
+    // if (outputVolume.totalVolumeOfMaxQs < 1) return null; // TODO: maxq senaryosu belli olunca bu açılacak
     return outputVolume;
   });
 
