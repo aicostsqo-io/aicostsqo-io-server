@@ -32,8 +32,14 @@ const createFolders = async () => {
   }
 };
 
+//Eski lokasyon için yazılan kod bloğu
+/*
 const getFolderAbsolutePath = (folderName) =>
   pathCombiner(__dirname, '../', '../', 'uploads', folderName);
+*/
+
+const getFolderAbsolutePath = (folderName) =>
+  pathCombiner(__dirname, '../', '../', '../../../../../../aicostsqo-static/uploads', folderName);
 
 const getFolderPath = (folderName) => pathCombiner('uploads', folderName);
 
