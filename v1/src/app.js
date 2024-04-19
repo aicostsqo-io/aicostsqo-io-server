@@ -10,6 +10,9 @@ const dotenv = require('dotenv');
 const errorHandler = require('./middlewares/errorHandler');
 const notFound = require('./middlewares/notFound');
 
+const directory = path.join(__dirname, '../../../../../../aicostsqo-static/uploads');
+//console.log(directory);
+//console.log(__dirname);
 dotenv.config({
   path: './config/.env', //dotenv config içerisine config dosyamızın path ini verdik
 });
@@ -35,7 +38,10 @@ app.listen(process.env.APP_PORT, () => {
     res.send('Hello World');
   });
   app.use('/api', require('./routes'));
-  app.use('/api/uploads', express.static(path.join(__dirname, 'uploads')));
+  //eski static directory
+  //app.use('/api/uploads', express.static(path.join(__dirname, 'uploads')));
+  //yeni lokasyon  konfigurasyonu
+  app.use('/api/uploads', express.static(directory));
   app.use(notFound);
   app.use(errorHandler);
 });
