@@ -33,7 +33,6 @@ jobs:
         
     - name: PROD_ENV Create
       run: |
-        mkdir -p ./v1/src/uploads/{excel-outputs,gpr-profiles,gprProfiles,gprs,magnetometrics,resistivities,resistivitiy-contours,resistivity-contours,seismic-profiles}
         touch v1/src/config/.env
         echo "${{ secrets.PROD_ENV_FILE }}" > v1/src/config/.env
 
