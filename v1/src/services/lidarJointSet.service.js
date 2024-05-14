@@ -6,6 +6,13 @@ const getBySiteId = async (siteId) => {
   throw new Error('Lidar joint sets not found');
 };
 
+const insert = async (data) => {
+  const created = await LidarJointSet.create(data);
+  if (created) return created;
+  throw new Error('Data can not created');
+};
+
 module.exports = {
   getBySiteId,
+  insert,
 };
