@@ -32,8 +32,45 @@ const exportBySiteToExcel = async (siteId) => {
   return await writeWorkbookToFile(workbook);
 };
 
+const importFromXlsx = async (fileName) => {
+  const res = await readWorkbookFromFile(fileName);
+  const worksheet = res.getWorksheet('JointSets');
+  const rows = worksheet.getSheetValues();
+  if (rows.length < 3) {
+    throw new Error('No JointSets found');
+  }
+  const fields = Object.keys(JOINT_SET_COLUMNS);
+  const columns = rows[1].filter((column) => column);
+  if (fields.length !== columns.length) {
+    throw new Error('Invalid column count');
+  }
+
+  if (
+    fields.some((field, index) => JOINT_SET_COLUMNS[field] !== columns[index])
+  ) {
+    throw new Error('Invalid column names');
+  }
+  for (let row = 2; row < rows.length; row++) {
+    const element = rows[row];
+    const obj = {};
+    for (let i = 0; i < fields.length; i++) {
+      obj[fields[i]] = element[i + 1];
+    }
+    await insert(obj);
+  }
+};
+
+const getExcelTemplate = async () => {
+  const workbook = createWorkBook();
+  addWorksheetToWorkbook(workbook, 'JointSets', JOINT_SET_COLUMNS, []);
+  const res = await writeWorkbookToFile(workbook);
+  return res;
+};
+
 module.exports = {
   insertJointSet: insert,
   getBySiteId,
   exportBySiteToExcel,
+  importFromXlsx,
+  getExcelTemplate,
 };

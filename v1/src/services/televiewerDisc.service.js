@@ -6,6 +6,12 @@ const insertDiscs = async (televiewerDiscData) => {
   throw new Error('TeleviewerDiscs are not created');
 };
 
+const insert = async (data) => {
+  const televiewerDisc = await TeleviewerDisc.create(data);
+  if (televiewerDisc) return televiewerDisc;
+  throw new Error('TeleviewerDisc is not created');
+};
+
 const getBySiteId = async (siteId) => {
   const televiewerDiscs = await TeleviewerDisc.find({ siteId });
   if (televiewerDiscs) return televiewerDiscs;
@@ -15,4 +21,5 @@ const getBySiteId = async (siteId) => {
 module.exports = {
   insertTeleviewerDiscs: insertDiscs,
   getBySiteId,
+  insert,
 };

@@ -1,6 +1,8 @@
 const {
   getBySiteId: getJointSets,
   exportBySiteToExcel,
+  getExcelTemplate: getJointSetsExcelTemplate,
+  importFromXlsx: importJointSetsFromXlsx,
 } = require('../services/jointSet.service');
 
 const getBySiteId = async (req, res) => {
@@ -23,7 +25,27 @@ const exportBySiteId = async (req, res) => {
   });
 };
 
+const getExcelTemplate = async (req, res) => {
+  const result = await getJointSetsExcelTemplate();
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
+const importFromXlsx = async (req, res) => {
+  const result = await importJointSetsFromXlsx(req.body.fileName);
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
   exportBySiteId,
+  importFromXlsx,
+  getExcelTemplate,
 };

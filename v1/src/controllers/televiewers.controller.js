@@ -1,6 +1,8 @@
 const {
   getBySiteId: getTeleviewers,
   exportBySiteToExcel,
+  importFromXlsx: importTeleviewersFromXlsx,
+  getExcelTemplate: getTeleviewersExcelTemplate,
 } = require('../services/televiewer.service');
 const { getBySiteId: getDiscs } = require('../services/televiewerDisc.service');
 
@@ -29,7 +31,27 @@ const exportBySiteId = async (req, res) => {
   });
 };
 
+const getExcelTemplate = async (req, res) => {
+  const result = await getTeleviewersExcelTemplate();
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
+const importFromXlsx = async (req, res) => {
+  const result = await importTeleviewersFromXlsx(req.body.fileName);
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
   exportBySiteId,
+  getExcelTemplate,
+  importFromXlsx,
 };
