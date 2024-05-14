@@ -1,7 +1,9 @@
+const { Workbook } = require('exceljs');
 const {
   fileNameGenerator,
   folderPaths,
   pathCombiner,
+  getFolderAbsolutePath,
 } = require('./uploadsFolderOrganizer');
 
 const writeWorkbookToFile = async (workbook) => {
@@ -9,6 +11,12 @@ const writeWorkbookToFile = async (workbook) => {
   const pathToSave = folderPaths.excelOutputs.absolutePath;
   await workbook.xlsx.writeFile(pathCombiner(pathToSave, fileName));
   return `${folderPaths.excelOutputs.path.replace('\\', '/')}/${fileName}`;
+};
+
+const readWorkbookFromFile = async (fileName) => {
+  const workbook = new Workbook();
+  const path = getFolderAbsolutePath(fileName);
+  return await workbook.xlsx.readFile(path);
 };
 
 const createWorksheetHeaders = (worksheet, columns) => {
@@ -27,4 +35,5 @@ const createWorksheetHeaders = (worksheet, columns) => {
 module.exports = {
   writeWorkbookToFile,
   createWorksheetHeaders,
+  readWorkbookFromFile,
 };

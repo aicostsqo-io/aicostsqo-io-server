@@ -80,4 +80,5 @@ module.exports = {
   createFolders,
   folderPaths,
   FOLDER_NAMES: FOLDERS,
+  getFolderAbsolutePath,
 };
