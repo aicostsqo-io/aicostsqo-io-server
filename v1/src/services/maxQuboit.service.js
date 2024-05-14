@@ -53,7 +53,7 @@ const exportByRpToExcel = async (rpId) => {
     OUTPUT_VOLUME_COLUMNS,
     outputVolumes
   );
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

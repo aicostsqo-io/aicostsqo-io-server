@@ -49,7 +49,7 @@ const exportBySiteToExcel = async (siteId) => {
     LIDAR_JOINT_SET_COLUMNS,
     jointSets
   );
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

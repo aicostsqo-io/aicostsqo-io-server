@@ -72,7 +72,7 @@ const exportBySiteBoundToExcel = async (siteBoundId) => {
   const workbook = createWorkBook();
   addWorksheetToWorkbook(workbook, 'RPs', RP_COLUMNS, rps);
   addWorksheetToWorkbook(workbook, 'Discs', RP_DISC_COLUMNS, rpDiscs);
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

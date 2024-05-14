@@ -60,7 +60,7 @@ const exportBySiteToExcel = async (siteId) => {
     seismicProfiles
   );
   addWorksheetToWorkbook(workbook, 'Discs', SEISMIC_DISC_COLUMNS, seismicDiscs);
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

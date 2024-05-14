@@ -29,7 +29,7 @@ const exportBySiteToExcel = async (siteId) => {
 
   const workbook = createWorkBook();
   addWorksheetToWorkbook(workbook, 'JointSets', JOINT_SET_COLUMNS, jointSets);
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

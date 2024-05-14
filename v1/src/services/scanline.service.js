@@ -29,7 +29,7 @@ const exportBySiteToExcel = async (siteId) => {
 
   const workbook = createWorkBook();
   addWorksheetToWorkbook(workbook, 'Scanlines', SCANLINE_COLUMNS, scanlines);
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

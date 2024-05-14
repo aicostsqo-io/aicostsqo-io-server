@@ -88,7 +88,7 @@ const exportBySiteToExcel = async (siteId) => {
     gprProfiles
   );
   addWorksheetToWorkbook(workbook, 'Discs', GPR_DISC_COLUMNS, gprDiscs);
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

@@ -163,7 +163,7 @@ const exportMySitesToExcel = async (userId) => {
 
   const workbook = createWorkBook();
   addWorksheetToWorkbook(workbook, 'Sites', SITE_COLUMNS, sites);
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

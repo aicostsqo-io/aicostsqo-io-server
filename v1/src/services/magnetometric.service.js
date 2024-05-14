@@ -52,7 +52,7 @@ const exportBySiteToExcel = async (siteId) => {
     MAGNETOMETRICS_DISC_COLUMNS,
     magnetometricDiscs
   );
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

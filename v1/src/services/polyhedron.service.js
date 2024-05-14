@@ -54,7 +54,7 @@ const exportByRpToExcel = async (rpId) => {
     OUTPUT_VERTEX_COLUMNS,
     outputVertexes
   );
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

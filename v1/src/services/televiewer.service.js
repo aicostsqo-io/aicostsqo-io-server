@@ -50,7 +50,7 @@ const exportBySiteToExcel = async (siteId) => {
     TELEVIEWER_DISC_COLUMNS,
     televiewerDiscs
   );
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {

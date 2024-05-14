@@ -48,7 +48,7 @@ const exportBySiteToExcel = async (siteId) => {
     RESISTIVITY_CONTOUR_COLUMNS,
     resistivitiyContours
   );
-  return writeWorkbookToFile(workbook);
+  return await writeWorkbookToFile(workbook);
 };
 
 module.exports = {
