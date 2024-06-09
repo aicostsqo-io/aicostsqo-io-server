@@ -7,6 +7,8 @@ const {
   getBySiteBoundId,
   distributionCurves,
   exportBySiteBoundToExcel,
+  getExcelTemplate,
+  importFromXlsx,
 } = require('../controllers/rps.controller');
 const errorCatcher = require('../scripts/utils/errorCatcher');
 const rpValidation = require('../validations/rp.validation');
@@ -28,5 +30,7 @@ router
     validate(rpValidation.distributionCurves),
     errorCatcher(distributionCurves)
   );
+router.route('/import/xlsx-template').get(errorCatcher(getExcelTemplate));
+router.route('/import/from-xlsx').post(errorCatcher(importFromXlsx));
 
 module.exports = router;

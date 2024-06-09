@@ -1,10 +1,13 @@
 const Rp = require('../models/rp.model');
 const { createOutputVolumes } = require('./distributionCurves.service');
 const { getByRp } = require('./outputVolume.service');
-const { writeWorkbookToFile } = require('../scripts/utils/excel.helper');
+const {
+  writeWorkbookToFile,
+  readWorkbookFromFile,
+} = require('../scripts/utils/excel.helper');
 const { addWorksheetToWorkbook, createWorkBook } = require('./excel.service');
 const { RP_COLUMNS, RP_DISC_COLUMNS } = require('./constants/modelColumns');
-const { getDiscsByRpId } = require('./rpDisc.service');
+const { getDiscsByRpId, insertDisc } = require('./rpDisc.service');
 
 const list = async () => {
   const rps = await Rp.find({});
@@ -75,6 +78,70 @@ const exportBySiteBoundToExcel = async (siteBoundId) => {
   return await writeWorkbookToFile(workbook);
 };
 
+const importFromXlsx = async (fileName) => {
+  const res = await readWorkbookFromFile(fileName);
+  const worksheet = res.getWorksheet('RPs');
+  const { _id, ...rpColumns } = RP_COLUMNS;
+  const rows = worksheet.getSheetValues();
+  const fields = Object.keys(rpColumns);
+  const columns = rows[1].filter((column) => column);
+  if (fields.length !== columns.length) {
+    throw new Error('Invalid column count');
+  }
+
+  if (fields.some((field, index) => rpColumns[field] !== columns[index])) {
+    throw new Error('Invalid column names');
+  }
+
+  for (let row = 2; row < rows.length; row++) {
+    const element = rows[row];
+    const obj = {};
+    for (let i = 0; i < fields.length; i++) {
+      obj[fields[i]] = element[i + 1];
+    }
+    await insert(obj);
+  }
+
+  const discsWorksheet = res.getWorksheet('Discs');
+  await importDiscFromXlsx(discsWorksheet);
+};
+
+const importDiscFromXlsx = async (worksheet) => {
+  const rows = worksheet.getSheetValues();
+  const { _id, ...rpDiscColumns } = RP_DISC_COLUMNS;
+  const fields = Object.keys(rpDiscColumns);
+  const columns = rows[1].filter((column) => column);
+  if (fields.length !== columns.length) {
+    throw new Error('Invalid column count');
+  }
+
+  if (fields.some((field, index) => rpDiscColumns[field] !== columns[index])) {
+    throw new Error('Invalid column names');
+  }
+
+  for (let row = 2; row < rows.length; row++) {
+    const element = rows[row];
+    const obj = {};
+    for (let i = 0; i < fields.length; i++) {
+      obj[fields[i]] = element[i + 1];
+    }
+    await insertDisc(obj);
+  }
+};
+
+const getExcelTemplate = async () => {
+  const workbook = createWorkBook();
+  const rpColumns = Object.values(RP_COLUMNS).filter(
+    (column) => column !== 'ID'
+  );
+  const rpDiscColumns = Object.values(RP_DISC_COLUMNS).filter(
+    (column) => column !== 'ID'
+  );
+  addWorksheetToWorkbook(workbook, 'RPs', rpColumns, []);
+  addWorksheetToWorkbook(workbook, 'Discs', rpDiscColumns, []);
+  return await writeWorkbookToFile(workbook);
+};
+
 module.exports = {
   bulkDeleteRps,
   listRps: list,
@@ -84,4 +151,6 @@ module.exports = {
   getLastRpBySiteBoundId,
   getOutputVolumesByRp,
   exportBySiteBoundToExcel,
+  getExcelTemplate,
+  importFromXlsx,
 };

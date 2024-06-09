@@ -7,6 +7,8 @@ const {
   getLastRpBySiteBoundId,
   getOutputVolumesByRp,
   exportBySiteBoundToExcel: exportBySiteBound,
+  getExcelTemplate: getRPsExcelTemplate,
+  importFromXlsx: importRPsFromXlsx,
 } = require('../services/rp.service');
 const {
   calculateDistributionCurves,
@@ -106,6 +108,24 @@ const exportBySiteBoundToExcel = async (req, res) => {
   });
 };
 
+const getExcelTemplate = async (req, res) => {
+  const result = await getRPsExcelTemplate();
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
+const importFromXlsx = async (req, res) => {
+  const result = await importRPsFromXlsx(req.body.fileName);
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
 module.exports = {
   bulkDelete,
   index,
@@ -114,4 +134,6 @@ module.exports = {
   bulkInsert,
   distributionCurves,
   exportBySiteBoundToExcel,
+  getExcelTemplate,
+  importFromXlsx,
 };
