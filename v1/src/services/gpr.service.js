@@ -4,10 +4,19 @@ const {
   GPR_PROFILE_COLUMNS,
   GPR_DISC_COLUMNS,
 } = require('./constants/modelColumns');
-const { getBySiteId: getDiscsBySiteId } = require('./gprDisc.service');
-const { getBySiteId: getProfilesBySiteId } = require('./gprProfile.service');
+const {
+  getBySiteId: getDiscsBySiteId,
+  insert: insertDisc,
+} = require('./gprDisc.service');
+const {
+  getBySiteId: getProfilesBySiteId,
+  insert: insertProfile,
+} = require('./gprProfile.service');
 const { createWorkBook, addWorksheetToWorkbook } = require('./excel.service');
-const { writeWorkbookToFile } = require('../scripts/utils/excel.helper');
+const {
+  writeWorkbookToFile,
+  readWorkbookFromFile,
+} = require('../scripts/utils/excel.helper');
 
 const insert = async (gprData) => {
   const gpr = await Gpr.create(gprData);
@@ -91,9 +100,172 @@ const exportBySiteToExcel = async (siteId) => {
   return await writeWorkbookToFile(workbook);
 };
 
+const importFromXlsx = async (fileName) => {
+  const res = await readWorkbookFromFile(fileName);
+  const worksheet = res.getWorksheet('GPRs');
+  const { _id, ...gprColumns } = GPR_COLUMNS;
+  const rows = worksheet.getSheetValues();
+  const fields = Object.keys(gprColumns);
+  const columns = rows[1].filter((column) => column);
+  if (fields.length !== columns.length) {
+    throw new Error('Invalid column count');
+  }
+
+  if (fields.some((field, index) => gprColumns[field] !== columns[index])) {
+    throw new Error('Invalid column names');
+  }
+
+  for (let row = 2; row < rows.length; row++) {
+    const element = rows[row];
+    const obj = {};
+    for (let i = 0; i < fields.length; i++) {
+      obj[fields[i]] = element[i + 1];
+    }
+    obj.vertex1 = {};
+    obj.vertex2 = {};
+    obj.vertex1.startOfLongitudinalProfilesX =
+      obj.vertex1StartOfLongitudinalProfilesX;
+    obj.vertex1.startOfLongitudinalProfilesY =
+      obj.vertex1StartOfLongitudinalProfilesY;
+    obj.vertex1.startOfLongitudinalProfilesZ =
+      obj.vertex1StartOfLongitudinalProfilesZ;
+    obj.vertex1.endOfLongitudinalProfilesX =
+      obj.vertex1EndOfLongitudinalProfilesX;
+    obj.vertex1.endOfLongitudinalProfilesY =
+      obj.vertex1EndOfLongitudinalProfilesY;
+    obj.vertex1.endOfLongitudinalProfilesZ =
+      obj.vertex1EndOfLongitudinalProfilesZ;
+    obj.vertex1.startOfTraversalProfilesX =
+      obj.vertex1StartOfTraversalProfilesX;
+    obj.vertex1.startOfTraversalProfilesY =
+      obj.vertex1StartOfTraversalProfilesY;
+    obj.vertex1.startOfTraversalProfilesZ =
+      obj.vertex1StartOfTraversalProfilesZ;
+    obj.vertex1.endOfTraversalProfilesX = obj.vertex1EndOfTraversalProfilesX;
+    obj.vertex1.endOfTraversalProfilesY = obj.vertex1EndOfTraversalProfilesY;
+    obj.vertex1.endOfTraversalProfilesZ = obj.vertex1EndOfTraversalProfilesZ;
+    obj.vertex2.startOfLongitudinalProfilesX =
+      obj.vertex2StartOfLongitudinalProfilesX;
+    obj.vertex2.startOfLongitudinalProfilesY =
+      obj.vertex2StartOfLongitudinalProfilesY;
+    obj.vertex2.startOfLongitudinalProfilesZ =
+      obj.vertex2StartOfLongitudinalProfilesZ;
+    obj.vertex2.endOfLongitudinalProfilesX =
+      obj.vertex2EndOfLongitudinalProfilesX;
+    obj.vertex2.endOfLongitudinalProfilesY =
+      obj.vertex2EndOfLongitudinalProfilesY;
+    obj.vertex2.endOfLongitudinalProfilesZ =
+      obj.vertex2EndOfLongitudinalProfilesZ;
+    obj.vertex2.startOfTraversalProfilesX =
+      obj.vertex2StartOfTraversalProfilesX;
+    obj.vertex2.startOfTraversalProfilesY =
+      obj.vertex2StartOfTraversalProfilesY;
+    obj.vertex2.startOfTraversalProfilesZ =
+      obj.vertex2StartOfTraversalProfilesZ;
+    obj.vertex2.endOfTraversalProfilesX = obj.vertex2EndOfTraversalProfilesX;
+    obj.vertex2.endOfTraversalProfilesY = obj.vertex2EndOfTraversalProfilesY;
+    obj.vertex2.endOfTraversalProfilesZ = obj.vertex2EndOfTraversalProfilesZ;
+
+    // clear
+    delete obj.vertex1StartOfLongitudinalProfilesX;
+    delete obj.vertex1StartOfLongitudinalProfilesY;
+    delete obj.vertex1StartOfLongitudinalProfilesZ;
+    delete obj.vertex1EndOfLongitudinalProfilesX;
+    delete obj.vertex1EndOfLongitudinalProfilesY;
+    delete obj.vertex1EndOfLongitudinalProfilesZ;
+    delete obj.vertex1StartOfTraversalProfilesX;
+    delete obj.vertex1StartOfTraversalProfilesY;
+    delete obj.vertex1StartOfTraversalProfilesZ;
+    delete obj.vertex1EndOfTraversalProfilesX;
+    delete obj.vertex1EndOfTraversalProfilesY;
+    delete obj.vertex1EndOfTraversalProfilesZ;
+    delete obj.vertex2StartOfLongitudinalProfilesX;
+    delete obj.vertex2StartOfLongitudinalProfilesY;
+    delete obj.vertex2StartOfLongitudinalProfilesZ;
+    delete obj.vertex2EndOfLongitudinalProfilesX;
+    delete obj.vertex2EndOfLongitudinalProfilesY;
+    delete obj.vertex2EndOfLongitudinalProfilesZ;
+    delete obj.vertex2StartOfTraversalProfilesX;
+    delete obj.vertex2StartOfTraversalProfilesY;
+    delete obj.vertex2StartOfTraversalProfilesZ;
+    delete obj.vertex2EndOfTraversalProfilesX;
+    delete obj.vertex2EndOfTraversalProfilesY;
+    delete obj.vertex2EndOfTraversalProfilesZ;
+
+    await insert(obj);
+  }
+
+  const discsWorksheet = res.getWorksheet('Discs');
+  await importDiscFromXlsx(discsWorksheet);
+
+  const profilesWorksheet = res.getWorksheet('Profiles');
+  await importProfileFromXlsx(profilesWorksheet);
+};
+
+const importDiscFromXlsx = async (worksheet) => {
+  const rows = worksheet.getSheetValues();
+  const fields = Object.keys(GPR_DISC_COLUMNS);
+  const columns = rows[1].filter((column) => column);
+  if (fields.length !== columns.length) {
+    throw new Error('Invalid column count');
+  }
+
+  if (
+    fields.some((field, index) => GPR_DISC_COLUMNS[field] !== columns[index])
+  ) {
+    throw new Error('Invalid column names');
+  }
+  for (let row = 2; row < rows.length; row++) {
+    const element = rows[row];
+    const obj = {};
+    for (let i = 0; i < fields.length; i++) {
+      obj[fields[i]] = element[i + 1];
+    }
+    await insertDisc(obj);
+  }
+};
+
+const importProfileFromXlsx = async (worksheet) => {
+  const rows = worksheet.getSheetValues();
+  const fields = Object.keys(GPR_PROFILE_COLUMNS);
+  const columns = rows[1].filter((column) => column);
+  if (fields.length !== columns.length) {
+    throw new Error('Invalid column count');
+  }
+
+  if (
+    fields.some((field, index) => GPR_PROFILE_COLUMNS[field] !== columns[index])
+  ) {
+    throw new Error('Invalid column names');
+  }
+
+  for (let row = 2; row < rows.length; row++) {
+    const element = rows[row];
+    const obj = {};
+    for (let i = 0; i < fields.length; i++) {
+      obj[fields[i]] = element[i + 1];
+    }
+    await insertProfile(obj);
+  }
+};
+
+const getExcelTemplate = async () => {
+  const workbook = createWorkBook();
+  const gprColumns = Object.values(GPR_COLUMNS).filter(
+    (column) => column !== 'ID'
+  );
+  addWorksheetToWorkbook(workbook, 'GPRs', gprColumns, []);
+  addWorksheetToWorkbook(workbook, 'Profiles', GPR_PROFILE_COLUMNS, []);
+  addWorksheetToWorkbook(workbook, 'Discs', GPR_DISC_COLUMNS, []);
+  const res = await writeWorkbookToFile(workbook);
+  return res;
+};
+
 module.exports = {
   insertGpr: insert,
   getBySiteId,
   bulkDelete,
   exportBySiteToExcel,
+  getExcelTemplate,
+  importFromXlsx,
 };

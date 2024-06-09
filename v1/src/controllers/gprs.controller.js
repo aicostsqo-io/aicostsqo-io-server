@@ -3,6 +3,8 @@ const {
   insertGpr,
   bulkDelete: removeGprs,
   exportBySiteToExcel,
+  getExcelTemplate: getGPRsExcelTemplate,
+  importFromXlsx: importGPRsFromXlsx,
 } = require('../services/gpr.service');
 const { getBySiteId: getDiscs } = require('../services/gprDisc.service');
 const {
@@ -75,6 +77,24 @@ const exportBySiteId = async (req, res) => {
   });
 };
 
+const getExcelTemplate = async (req, res) => {
+  const result = await getGPRsExcelTemplate();
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
+const importFromXlsx = async (req, res) => {
+  const result = await importGPRsFromXlsx(req.body.fileName);
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
   create,
@@ -82,4 +102,6 @@ module.exports = {
   deleteGprs,
   deleteGprProfiles,
   exportBySiteId,
+  getExcelTemplate,
+  importFromXlsx,
 };
