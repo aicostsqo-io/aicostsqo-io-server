@@ -8,6 +8,12 @@ const insertDiscs = async (magnetometricDiscData) => {
   throw new Error('MagnetometricDiscs are not created');
 };
 
+const insert = async (data) => {
+  const created = await MagnetometricDisc.create(data);
+  if (created) return created;
+  throw new Error('Data can not created');
+};
+
 const getBySiteId = async (siteId) => {
   const magnetometricDiscs = await MagnetometricDisc.find({ siteId });
   if (magnetometricDiscs) return magnetometricDiscs;
@@ -17,4 +23,5 @@ const getBySiteId = async (siteId) => {
 module.exports = {
   insertMagnetometricDiscs: insertDiscs,
   getBySiteId,
+  insert,
 };

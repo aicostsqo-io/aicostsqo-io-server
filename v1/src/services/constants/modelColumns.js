@@ -360,6 +360,43 @@ const OUTPUT_FACE_COLUMNS = {
   vertexes: 'Vertexes',
 };
 
+const MAGNETOMETRICS_COLUMNS = {
+  _id: 'ID',
+  siteId: 'Site ID',
+  magnetometricMeasurementId: 'Magnetometric Measurement ID',
+  profileNumber: 'Profile Number',
+  latitudeMin: 'Latitude Min',
+  longitudeMin: 'Longitude Min',
+  altitudeMin: 'Altitude Min',
+  latitudeMax: 'Latitude Max',
+  longitudeMax: 'Longitude Max',
+  altitudeMax: 'Altitude Max',
+  magnetometricProfileDirectory: 'Magnetometric Profile Directory',
+  explanation: 'Explanation',
+};
+
+const MAGNETOMETRICS_DISC_COLUMNS = {
+  _id: 'ID',
+  siteId: 'Site ID',
+  rectangleLineNumber: 'Rectangle Line Number',
+  profileType: 'Profile Type',
+  crackProfileNumber: 'Crack Profile Number',
+  typeOfCrack: 'Type Of Crack',
+  typeOfDisc: 'Type Of Disc',
+  dip: 'Dip',
+  dipDirection: 'Dip Direction',
+  mapReferenceSystem: 'Map Reference System',
+  startingVertexX: 'Starting Vertex X',
+  startingVertexY: 'Starting Vertex Y',
+  startingVertexZ: 'Starting Vertex Z',
+  endVertexX: 'End Vertex X',
+  endVertexY: 'End Vertex Y',
+  endVertexZ: 'End Vertex Z',
+  nX: 'N X',
+  nY: 'N Y',
+  nZ: 'N Z',
+};
+
 module.exports = {
   RP_COLUMNS,
   RP_DISC_COLUMNS,
@@ -383,4 +420,6 @@ module.exports = {
   OUTPUT_POLYHEDRON_COLUMNS,
   OUTPUT_VERTEX_COLUMNS,
   OUTPUT_FACE_COLUMNS,
+  MAGNETOMETRICS_COLUMNS,
+  MAGNETOMETRICS_DISC_COLUMNS,
 };

@@ -1,6 +1,8 @@
 const {
   getBySiteId: getMagnetometrics,
   exportBySiteToExcel,
+  getExcelTemplate: getMagnetometricsExcelTemplate,
+  importFromXlsx: importMagnetometricsFromXlsx,
 } = require('../services/magnetometric.service');
 const {
   getBySiteId: getDiscs,
@@ -31,7 +33,27 @@ const exportBySiteId = async (req, res) => {
   });
 };
 
+const getExcelTemplate = async (req, res) => {
+  const result = await getMagnetometricsExcelTemplate();
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
+const importFromXlsx = async (req, res) => {
+  const result = await importMagnetometricsFromXlsx(req.body.fileName);
+  res.send({
+    result,
+    success: true,
+    message: 'Imported successfully',
+  });
+};
+
 module.exports = {
   getBySiteId,
   exportBySiteId,
+  getExcelTemplate,
+  importFromXlsx,
 };
