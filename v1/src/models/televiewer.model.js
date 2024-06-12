@@ -8,7 +8,7 @@ const TeleviewerSchema = Mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ['Optical', 'Acoustic'],
+      enum: ['Optical', 'Acoustic', 'Standard'],
     },
     sizeX: {
       type: Number,

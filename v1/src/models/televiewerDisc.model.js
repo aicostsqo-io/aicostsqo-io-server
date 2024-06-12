@@ -20,6 +20,7 @@ const TeleviewerDiscSchema = Mongoose.Schema(
     nZ: Number,
     holeNumber: Number,
     typeOfHole: String,
+    holeVerticalAngle: String,
     imageOrMeshOfFractureInterpolation: String,
     explanation: String,
     zAdjust: Number,
