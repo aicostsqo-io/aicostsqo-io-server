@@ -30,6 +30,12 @@ const list = async () => {
   throw new Error('Sites not found');
 };
 
+const listByProjectId = async (projectId) => {
+  const sites = await Site.find({ project: projectId });
+  if (sites) return sites;
+  throw new Error('Sites not found');
+};
+
 const get = async (id) => {
   const site = await Site.findById(id);
   if (site) return site;
@@ -169,6 +175,7 @@ const exportMySitesToExcel = async (userId) => {
 module.exports = {
   insertSite: insert,
   listSites: list,
+  listSitesByProjectId: listByProjectId,
   getSite: get,
   insertWithRelations,
   exportMySitesToExcel,

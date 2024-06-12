@@ -2,11 +2,13 @@ const { getUserIdFromRequest } = require('../scripts/utils/helper');
 const { getRpsBySiteBoundId } = require('../services/rp.service');
 const {
   listSites,
+  listSitesByProjectId,
   getSite,
   insertWithRelations,
   insertSite,
   exportMySitesToExcel: exportMySites,
 } = require('../services/site.service');
+const { insertRp } = require('../services/rp.service');
 const {
   getSiteBoundBySiteId,
   insertSiteBound,
@@ -22,9 +24,22 @@ const create = async (req, res) => {
 
 const manual = async (req, res) => {
   const siteToInsert = await insertSite(req.body.site);
-  await insertSiteBound({
+  const siteBoundToInsert = await insertSiteBound({
     site: siteToInsert._id,
     ...req.body.siteBound,
+  });
+
+  await insertRp({
+    siteBound: siteBoundToInsert._id,
+    positionX: 0,
+    positionY: 0,
+    positionZ: 0,
+    sizeX: 0,
+    sizeY: 0,
+    sizeZ: 0,
+    name: 'RP 0',
+    slopeAngle: 0,
+    crepeAngle: 0,
   });
 
   res.send({
@@ -34,8 +49,9 @@ const manual = async (req, res) => {
 };
 
 const list = async (req, res) => {
-  const sites = await listSites();
-
+  const { projectId } = req.params;
+  // const sites = await listSites();
+  const sites = await listSitesByProjectId(projectId);
   const siteData = await Promise.all(
     sites.map(async (site) => {
       const siteBound = await getSiteBoundBySiteId(site._id);

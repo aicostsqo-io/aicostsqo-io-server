@@ -6,7 +6,7 @@ const SiteSchema = Mongoose.Schema(
       type: Mongoose.Schema.Types.ObjectId,
       ref: 'users',
     },
-    projectId: {
+    project: {
       type: Mongoose.Schema.Types.ObjectId,
       ref: 'projects',
       default: null,

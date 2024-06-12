@@ -11,7 +11,8 @@ const authenticateToken = require('../middlewares/authenticate');
 
 const router = express.Router();
 
-router.route('/').post(errorCatcher(create)).get(errorCatcher(list));
+router.route('/').post(errorCatcher(create));
+router.route('/project/:projectId').get(errorCatcher(list));
 router
   .route('/export/my')
   .get(authenticateToken, errorCatcher(exportMySitesToExcel));
