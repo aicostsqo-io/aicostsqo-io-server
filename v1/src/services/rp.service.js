@@ -30,9 +30,19 @@ const insert = async (rpData) => {
 };
 
 const getRpsBySiteBoundId = async (siteBoundId) => {
-  const rps = await Rp.find({ siteBound: siteBoundId }).sort({ name: 1 });
-  if (rps) return rps;
-  throw new Error('Rps not found');
+  const rps = await Rp.find({ siteBound: siteBoundId });
+
+  if (!rps) {
+    throw new Error('Rps not found');
+  }
+
+  rps.sort((a, b) => {
+    const numA = parseInt(a.name.replace(/\D/g, ''), 10);
+    const numB = parseInt(b.name.replace(/\D/g, ''), 10);
+    return numA - numB;
+  });
+
+  return rps;
 };
 
 const getLastRpBySiteBoundId = async (siteBoundId) => {
