@@ -1,5 +1,8 @@
 const JointSet = require('../models/joinSet.model');
-const { writeWorkbookToFile } = require('../scripts/utils/excel.helper');
+const {
+  writeWorkbookToFile,
+  readWorkbookFromFile,
+} = require('../scripts/utils/excel.helper');
 const { JOINT_SET_COLUMNS } = require('./constants/modelColumns');
 const { createWorkBook, addWorksheetToWorkbook } = require('./excel.service');
 

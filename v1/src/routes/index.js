@@ -7,6 +7,7 @@ router.use('/auth', require('./auth.routes'));
 router.use('/users', require('./users.routes'));
 router.use('/siteBounds', authenticateToken, require('./siteBounds.routes'));
 router.use('/fields', authenticateToken, require('./sites.routes'));
+router.use('/projects', authenticateToken, require('./projects.routes'));
 router.use('/rps', authenticateToken, require('./rps.routes'));
 router.use('/gprs', authenticateToken, require('./gprs.routes'));
 router.use(

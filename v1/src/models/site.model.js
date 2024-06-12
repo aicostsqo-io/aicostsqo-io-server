@@ -6,6 +6,11 @@ const SiteSchema = Mongoose.Schema(
       type: Mongoose.Schema.Types.ObjectId,
       ref: 'users',
     },
+    projectId: {
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: 'projects',
+      default: null,
+    },
     name: String,
     generateVirtual1DExtendedRPs: Boolean,
     calculateMaximumCuboids: Boolean,
