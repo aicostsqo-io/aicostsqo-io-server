@@ -14,7 +14,7 @@ const uploadFile = (file, folderToSave, extensionRules = null) => {
       __dirname,
       '../',
       '../',
-      'uploads',
+      '../../../../../../aicostsqo-static/uploads',
       folderToSave
     );
 
