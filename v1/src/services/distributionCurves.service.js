@@ -84,9 +84,15 @@ const calculateDistributionCurves = async (
         chart
       );
       if (chart === Charts.Pdf) {
-        const normalizedObserved = Sources[source][chart].map((p) => ({
+        const rawData = Sources[source][chart].map((p) => ({
           x: p.x,
           y: minMaxNormalization(p.y, Sources[source][chart]),
+        }));
+        const generatedData = applyMonteCarlo(Sources[source][chart], 81);
+
+        const normalizedObserved = generatedData.map((p) => ({
+          x: p.x,
+          y: minMaxNormalization(p.y, generatedData),
         }));
         Sources[source][chart] = {};
         const normal = normalDistribution(normalizedObserved);
@@ -99,11 +105,40 @@ const calculateDistributionCurves = async (
         Sources[source][chart].observed = normalizedObserved;
         Sources[source][chart].expected =
           sortRes[0].chiSquareTestResult.expected;
+        Sources[source][chart].ungenerated = rawData.slice(
+          0,
+          rawData.length - 2 // TODO: fix this shit
+        );
       }
     }
     result[source] = Sources[source];
   }
   return result;
+};
+
+const applyMonteCarlo = (source, count) => {
+  let result = monteCarlo(source);
+  while (true) {
+    if (result.length >= count) break;
+    result = monteCarlo(result);
+  }
+  return result;
+};
+
+const monteCarlo = (source) => {
+  const arr = [];
+
+  for (let i = 0; i < source.length - 1; i++) {
+    const element = source[i];
+    const nextElement = source[i + 1];
+    arr.push(element);
+    const monteCarlo = {
+      x: (element.x + nextElement.x) / 2,
+      y: Math.random() * (nextElement.y - element.y) + element.y,
+    };
+    arr.push(monteCarlo);
+  }
+  return arr;
 };
 
 const calculateByChart = (source, chart) => {

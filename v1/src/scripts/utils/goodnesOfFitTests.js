@@ -37,6 +37,7 @@ const CHI_SQUARE_TABLE_0_05 = [
   [60, 79.082],
   [70, 90.531],
   [80, 101.879],
+  [81, 103.01],
 ];
 
 // if return false then the null hypothesis is accepted
