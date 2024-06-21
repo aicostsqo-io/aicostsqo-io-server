@@ -6,6 +6,12 @@ const insert = async (discData) => {
   throw new Error('Disc not created');
 };
 
+const update = async (discId, discData) => {
+  const disc = await RPDisc.findByIdAndUpdate(discId, discData, { new: true });
+  if (disc) return disc;
+  throw new Error('Disc not updated');
+};
+
 const insertDiscs = async (discsData) => {
   const discs = await RPDisc.insertMany(discsData);
   if (discs) return discs;
@@ -35,6 +41,7 @@ const bulkInsertDisc = async (discs) => {
 module.exports = {
   insertDisc: insert,
   insertDiscs: insertDiscs,
+  updateDisc: update,
   listDiscs: list,
   getDiscsByRpId,
   bulkDeleteRpDiscs,

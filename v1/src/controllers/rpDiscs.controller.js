@@ -2,6 +2,7 @@ const {
   listDiscs,
   getDiscsByRpId,
   insertDisc,
+  updateDisc,
   bulkDeleteRpDiscs,
   bulkInsertDisc,
 } = require('../services/rpDisc.service');
@@ -31,6 +32,16 @@ const create = async (req, res) => {
   });
 };
 
+const update = async (req, res) => {
+  const { discId } = req.params;
+  const disc = await updateDisc(discId, req.body);
+  res.send({
+    disc,
+    success: true,
+    message: 'Disc updated successfully',
+  });
+};
+
 const bulkDelete = async (req, res) => {
   await bulkDeleteRpDiscs(req.body);
   res.send({
@@ -52,6 +63,7 @@ module.exports = {
   index,
   listByRpId,
   create,
+  update,
   bulkDelete,
   manual,
 };

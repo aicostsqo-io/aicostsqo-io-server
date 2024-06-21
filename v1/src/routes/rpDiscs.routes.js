@@ -3,6 +3,7 @@ const {
   index,
   listByRpId,
   create,
+  update,
   bulkDelete,
   manual,
 } = require('../controllers/rpDiscs.controller');
@@ -12,6 +13,7 @@ const router = express.Router();
 
 router.route('/').get(errorCatcher(index));
 router.route('/').post(errorCatcher(create));
+router.route('/:discId').put(errorCatcher(update));
 router.route('/:id').get(errorCatcher(listByRpId));
 router.route('/bulk-delete').post(errorCatcher(bulkDelete));
 router.route('/manual').post(errorCatcher(manual));
