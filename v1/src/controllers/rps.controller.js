@@ -2,6 +2,7 @@ const {
   listRps,
   bulkDeleteRps,
   insertRp,
+  updateRp,
   getRpsBySiteBoundId,
   bulkInsertRps,
   getLastRpBySiteBoundId,
@@ -25,6 +26,16 @@ const create = async (req, res) => {
     rp,
     success: true,
     message: 'Rp created successfully',
+  });
+};
+
+const update = async (req, res) => {
+  const { rpId } = req.params;
+  const rp = await updateRp(rpId, req.body);
+  res.send({
+    rp,
+    success: true,
+    message: 'Rp updated successfully',
   });
 };
 
@@ -130,6 +141,7 @@ module.exports = {
   bulkDelete,
   index,
   create,
+  update,
   getBySiteBoundId,
   bulkInsert,
   distributionCurves,

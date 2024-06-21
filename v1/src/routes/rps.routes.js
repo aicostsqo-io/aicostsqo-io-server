@@ -2,6 +2,7 @@ const express = require('express');
 const {
   index,
   create,
+  update,
   bulkDelete,
   bulkInsert,
   getBySiteBoundId,
@@ -17,6 +18,7 @@ const validate = require('../middlewares/validate');
 const router = express.Router();
 
 router.route('/').get(errorCatcher(index));
+router.route('/:rpId').put(errorCatcher(update));
 router.route('/:siteBoundId').get(errorCatcher(getBySiteBoundId));
 router.route('/').post(errorCatcher(create));
 router.route('/bulk-delete').post(errorCatcher(bulkDelete));
