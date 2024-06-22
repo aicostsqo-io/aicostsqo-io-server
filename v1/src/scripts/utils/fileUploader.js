@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const uuid = require('uuid');
 const path = require('path');
+require('dotenv').config();
 
 const uploadFile = (file, folderToSave, extensionRules = null) => {
   return new Promise(async (resolve, reject) => {
@@ -14,7 +15,8 @@ const uploadFile = (file, folderToSave, extensionRules = null) => {
       __dirname,
       '../',
       '../',
-      '../../../../../../aicostsqo-static/uploads',
+      process.env.FILE_UPLOAD_PATH ||
+        '../../../../../../aicostsqo-static/uploads',
       folderToSave
     );
 

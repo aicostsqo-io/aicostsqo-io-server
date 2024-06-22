@@ -1,6 +1,7 @@
 const path = require('path');
 const uuid = require('uuid');
 const fs = require('node:fs');
+require('dotenv').config();
 
 const FOLDERS = {
   excelOutputs: 'excel-outputs',
@@ -33,13 +34,20 @@ const createFolders = async () => {
 };
 
 //Eski lokasyon için yazılan kod bloğu
-/*
-const getFolderAbsolutePath = (folderName) =>
-  pathCombiner(__dirname, '../', '../', 'uploads', folderName);
-*/
+const FILE_UPLOAD_PATH =
+  process.env.FILE_UPLOAD_PATH || '../../../../../../aicostsqo-static/uploads';
 
 const getFolderAbsolutePath = (folderName) =>
-  pathCombiner(__dirname, '../', '../', '../../../../../../aicostsqo-static/uploads', folderName);
+  pathCombiner(__dirname, '../', '../', FILE_UPLOAD_PATH, folderName);
+
+// const getFolderAbsolutePath = (folderName) =>
+//   pathCombiner(
+//     __dirname,
+//     '../',
+//     '../',
+//     '../../../../../../aicostsqo-static/uploads',
+//     folderName
+//   );
 
 const getFolderPath = (folderName) => pathCombiner('uploads', folderName);
 
