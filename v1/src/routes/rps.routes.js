@@ -10,6 +10,7 @@ const {
   exportBySiteBoundToExcel,
   getExcelTemplate,
   importFromXlsx,
+  copyPaste,
 } = require('../controllers/rps.controller');
 const errorCatcher = require('../scripts/utils/errorCatcher');
 const rpValidation = require('../validations/rp.validation');
@@ -19,6 +20,7 @@ const router = express.Router();
 
 router.route('/').get(errorCatcher(index));
 router.route('/:rpId').put(errorCatcher(update));
+router.route(`/copy-paste/:siteBoundId`).post(errorCatcher(copyPaste));
 router.route('/:siteBoundId').get(errorCatcher(getBySiteBoundId));
 router.route('/').post(errorCatcher(create));
 router.route('/bulk-delete').post(errorCatcher(bulkDelete));

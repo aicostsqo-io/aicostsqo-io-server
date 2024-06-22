@@ -14,6 +14,13 @@ const list = async () => {
   if (rps) return rps;
   throw new Error('Rps not found');
 };
+
+const get = async (rpId) => {
+  const rp = await Rp.findById(rpId);
+  if (rp) return rp;
+  throw new Error('Rp not found');
+};
+
 const bulkDeleteRps = async (rps) => {
   const result = await Rp.deleteMany({ _id: { $in: rps } });
   console.log('silme sonucu: ', result);
@@ -163,6 +170,7 @@ module.exports = {
   listRps: list,
   insertRp: insert,
   updateRp: update,
+  getRp: get,
   getRpsBySiteBoundId,
   bulkInsertRps,
   getLastRpBySiteBoundId,

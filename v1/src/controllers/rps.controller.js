@@ -3,6 +3,7 @@ const {
   bulkDeleteRps,
   insertRp,
   updateRp,
+  getRp,
   getRpsBySiteBoundId,
   bulkInsertRps,
   getLastRpBySiteBoundId,
@@ -14,6 +15,7 @@ const {
 const {
   calculateDistributionCurves,
 } = require('../services/distributionCurves.service');
+const { getDiscsByRpId, insertDisc } = require('../services/rpDisc.service');
 
 const create = async (req, res) => {
   const { name } = await getLastRpBySiteBoundId(req.body.siteBound);
@@ -26,6 +28,41 @@ const create = async (req, res) => {
     rp,
     success: true,
     message: 'Rp created successfully',
+  });
+};
+
+const copyPaste = async (req, res) => {
+  const { siteBoundId } = req.params;
+  const { rpId } = req.body;
+
+  const { name } = await getLastRpBySiteBoundId(siteBoundId);
+  const lastRPNumber = parseInt(name.split(' ')[1]);
+
+  const rpToCopy = await getRp(rpId);
+  const cleanRP = JSON.parse(JSON.stringify(rpToCopy));
+  const { _id, createdAt, updatedAt, ...cleanRPData } = cleanRP;
+
+  const pastedRp = await insertRp({
+    ...cleanRPData,
+    name: `RP ${lastRPNumber + 1}`,
+    siteBound: siteBoundId,
+  });
+
+  const rpDiscs = await getDiscsByRpId(rpId);
+  const cleanRpDiscs = JSON.parse(JSON.stringify(rpDiscs));
+  for (let rpDisc of cleanRpDiscs) {
+    const { _id, createdAt, updatedAt, ...cleanRpDisc } = rpDisc;
+
+    await insertDisc({
+      ...cleanRpDisc,
+      rpId: pastedRp._id,
+    });
+  }
+
+  res.send({
+    pastedRp,
+    success: true,
+    message: 'Rp pasted successfully',
   });
 };
 
@@ -148,4 +185,5 @@ module.exports = {
   exportBySiteBoundToExcel,
   getExcelTemplate,
   importFromXlsx,
+  copyPaste,
 };
