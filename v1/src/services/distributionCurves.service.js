@@ -107,7 +107,7 @@ const calculateDistributionCurves = async (
           sortRes[0].chiSquareTestResult.expected;
         Sources[source][chart].ungenerated = rawData.slice(
           0,
-          rawData.length - 2 // TODO: fix this shit
+          rawData.length - 1 // TODO: fix this shit
         );
       }
     }
