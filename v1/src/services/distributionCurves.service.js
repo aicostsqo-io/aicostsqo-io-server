@@ -117,6 +117,7 @@ const calculateDistributionCurves = async (
 };
 
 const applyMonteCarlo = (source, count) => {
+  if (!source || source.length < 1) return [];
   let result = monteCarlo(source);
   while (true) {
     if (result.length >= count) break;
