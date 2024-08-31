@@ -58,6 +58,16 @@ const getRpsBySiteBoundId = async (siteBoundId) => {
   return rps;
 };
 
+const getRpById = async (id) => {
+  const rp = await Rp.findById(id);
+
+  if (!rp) {
+    throw new Error('rp not found');
+  }
+
+  return rp;
+};
+
 const getLastRpBySiteBoundId = async (siteBoundId) => {
   const rp = await Rp.findOne({
     siteBound: siteBoundId,
@@ -178,4 +188,5 @@ module.exports = {
   exportBySiteBoundToExcel,
   getExcelTemplate,
   importFromXlsx,
+  getRpById,
 };

@@ -11,6 +11,7 @@ const {
   exportBySiteBoundToExcel: exportBySiteBound,
   getExcelTemplate: getRPsExcelTemplate,
   importFromXlsx: importRPsFromXlsx,
+  getRpById,
 } = require('../services/rp.service');
 const {
   calculateDistributionCurves,
@@ -126,6 +127,16 @@ const getBySiteBoundId = async (req, res) => {
   });
 };
 
+const getById = async (req, res) => {
+  const { rpId } = req.params;
+  const rp = await getRpById(rpId);
+  res.send({
+    rp,
+    success: true,
+    message: 'Rp listed successfully',
+  });
+};
+
 const distributionCurves = async (req, res) => {
   const { rpIdList, sourceList, chartList } = req.body;
   const result = [];
@@ -186,4 +197,5 @@ module.exports = {
   getExcelTemplate,
   importFromXlsx,
   copyPaste,
+  getById,
 };
